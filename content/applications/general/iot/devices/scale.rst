@@ -7,7 +7,7 @@ Connect a scale
    <https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.096.01.0107.01.ENG>`_
    to use a scale as an integrated device.
 
-To connect a scale to the IoT system, use a USB cable. In some cases, you may need a serial-to-US
+To connect a scale to the IoT system, use a USB cable. In some cases, you may need a serial-to-USB
 adapter to complete the connection. If the scale is `compatible with an IoT system
 <https://www.odoo.com/page/iot-hardware>`_, no additional setup is required; the scale is
 automatically detected as soon as it is connected. If the scale is not detected, reboot the IoT box
@@ -19,10 +19,12 @@ scale's drivers <iot_updating_iot/handlers>`.
    the Odoo IoT system <https://www.odoo.com/page/iot-hardware>`_. In such cases, a different scale
    must be used.
 
-Once the scale is connected to the IoT system, :ref:`configure it in the POS settings <pos/scale>`.
+Once the scale is connected to the IoT system, :doc:`configure it in the POS settings
+</applications/sales/point_of_sale/hardware_network/scale>`.
 
 .. seealso::
-   :doc:`Connect an IoT system to a POS </applications/sales/point_of_sale/configuration/pos_iot>`
+   :doc:`Connect an IoT system to a POS
+   </applications/sales/point_of_sale/hardware_network/pos_iot>`
 
 Ariva S scales
 ==============

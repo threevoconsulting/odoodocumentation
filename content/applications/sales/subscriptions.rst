@@ -180,6 +180,8 @@ navigating the recurring revenue sources attached to the plan:
   active, in an itemized fashion. :guilabel:`Subscription` and :guilabel:`Customer` values will
   repeat if the customer ordered multiple subscriptions on the same sales order.
 
+.. _subscriptions/form-configuration:
+
 Product form configuration
 ==========================
 
@@ -208,16 +210,14 @@ subscription product will function correctly:
 - :guilabel:`Sales Price`: enter the recurring cost of the subscription that the customer will pay
   per recurrence period.
 
-Optionally set up information on the:
+.. important::
+   When creating a subscription for a physical good, selecting the wrong :guilabel:`Invoicing
+   Policy` will lead to errors when creating invoices. Physical products must be set to
+   :guilabel:`Ordered quantities`.
 
-- :guilabel:`Create on Order` field: this enables secondary actions in Odoo such as creating a new
-  :guilabel:`Task` in a chosen :guilabel:`Project` :icon:`fa-building-o`, :guilabel:`Event
-  Registration` or :guilabel:`Course Access`. If none of the selectable actions in this field's
-  drop-down menu are needed, then choose :guilabel:`Nothing` for the field' value.
-- :doc:`Attributes & Variants <sales/products_prices/products/variants>` tab if the subscription
-  contains multiple choices for customers (i.e. food delivery, tailored fashion boxes, etc.).
-- :guilabel:`Purchase` tab if the product is sourced from a vendor, such as part of reseller
-  (retail) or subcontracting operations.
+Optionally set up information on the :doc:`Attributes & Variants
+<sales/products_prices/products/variants>` tab if the subscription contains multiple choices for
+customers (i.e. food delivery, tailored fashion boxes, etc.).
 
 In the :guilabel:`Recurring Prices` tab, clarify the pricing options for the subscription. For each
 option available, click :guilabel:`Add a price rule` to add a new row.
@@ -292,7 +292,7 @@ quotation, set the checkboxes next to either (or both) of these labels in the :g
 tab, under the :guilabel:`SALES` section.
 
 .. seealso::
-   - :doc:`/applications/finance/accounting/payments/online`
+   - :ref:`Online Payments <accounting/payments/online>`
    - :doc:`Payment providers and payment methods </applications/finance/payment_providers>`
 
 .. toctree::
@@ -302,5 +302,6 @@ tab, under the :guilabel:`SALES` section.
    subscriptions/upselling
    subscriptions/renewals
    subscriptions/closing
-   subscriptions/scheduled_actions
    subscriptions/reports
+   subscriptions/automatic_payments
+   subscriptions/subscriptions_deliveries

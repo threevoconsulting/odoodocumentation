@@ -42,9 +42,11 @@ attribute to control the animation's direction intensity.
 
 .. code-block:: xml
 
-   <div class="col-lg-6 o_animate o_anim_fade_in o_animate_both_scroll o_anim_from_bottom" style="--wanim-intensity: 100; animation-duration: 2s; animation-delay: 1s;">
-       <h2>A Section Subtitle</h2>
-       <p>Write one or two paragraphs describing your product or services.</p>
+   <div
+      class="col-lg-6 o_animate o_anim_from_right o_anim_slide_in"
+      style="--wanim-intensity: 50; animation-duration: 1s; animation-delay: 0;">
+      <h2>A Section Subtitle</h2>
+      <p>Write one or two paragraphs describing your product or services.</p>
    </div>
 
 .. image:: animations/appearance.png
@@ -74,10 +76,14 @@ Additionally, we can also set an `in` or `out` effect, an animation `direction` 
 
 .. code-block:: xml
 
-    <div class="col-lg-6 o_animate o_animate_on_scroll o_animate_out o_anim_fade_in o_anim_from_right" data-scroll-zone-start="50" data-scroll-zone-end="100" style="--wanim-intensity: 100;">
-        <h2>A Section Subtitle</h2>
-        <p>Write one or two paragraphs describing your product or services.</p>
-    </div>
+   <div
+      class="col-lg-6 o_animate o_animate_on_scroll o_animate_out o_anim_fade_in o_anim_from_right"
+      data-scroll-zone-start="50"
+      data-scroll-zone-end="100"
+      style="--wanim-intensity: 100;">
+      <h2>A Section Subtitle</h2>
+      <p>Write one or two paragraphs describing your product or services.</p>
+   </div>
 
 .. list-table::
    :header-rows: 1
@@ -102,7 +108,7 @@ Additionally, we can also set an `in` or `out` effect, an animation `direction` 
 
 .. seealso::
    `Website Animate
-   <https://github.com/odoo/odoo/blob/c272c49657e8b7865bb93e5f1dcc183cc7d44f17/addons/website/static/src/scss/website.scss#L2075>`_
+   <https://github.com/odoo/odoo/blob/e901555e99e59590aa25595bf791d4856e085999/addons/website/static/src/scss/website.scss#L2388>`_
 
 .. _website_themes/animations/hover:
 
@@ -112,7 +118,7 @@ On hover
 This third kind of animations is only related to images and triggered every time we hover on the
 animated image.
 
-We can add 6 animation on hover effects:
+We can choose among 6 animations to apply an hover effect:
 
 - Overlay
 - Zoom In
@@ -123,17 +129,27 @@ We can add 6 animation on hover effects:
 
 **Use**
 
-Enable animations on hover by adding the `o_animate_on_hover` class on your image tag. You can
-also define the type of animation in the `data-hover-effect` attribute.
+Enable animations on hover by adding the `o_animate_on_hover` class on your image tag. Define the
+type of animation in the `data-hover-effect` attribute.
+
+.. note::
+
+   Odoo processes the image and creates a final SVG file containing the image and the animation. By
+   default, it also applies a regular image shape. This final image is then stored in the database
+   as an attachment to keep it editable in the future.
 
 .. code-block:: xml
 
-    <img
-        src="..." alt="..."
-        class="img img-fluid o_we_custom_image o_animate_on_hover"
-        data-hover-effect="overlay"
-        data-hover-effect-color="rgba(0, 0, 0, 0.25)"
-    />
+   <img
+      src="..."
+      alt="..."
+      class="img img-fluid o_we_custom_image o_animate_on_hover"
+      data-hover-effect="overlay"
+      data-hover-effect-color="rgba(0, 0, 0, 0.25)"
+      data-shape="html_editor/geometric/geo_square"
+      data-shape-colors=";;;;"
+      data-filename="my-image.svg"
+      data-format-mimetype="image/webp" />
 
 .. list-table::
    :header-rows: 1
@@ -155,11 +171,26 @@ also define the type of animation in the `data-hover-effect` attribute.
    * - Stroke width
      - `data-hover-stroke-width`
      - Integer (saved as `px`)
+   * - Shape
+     - `data-shape`
+     - Path to the shape
+   * - Colors of the shape
+     - `data-shape-colors`
+     - Hexadecimal code of the colors available (5 max) in the shape (each value, even if empty,
+       is separated by a semicolon and refer to the color palette index used in the shape file)
 
 .. image:: animations/hover.png
-   :width: 300
    :alt: Animation on hover options
 
+.. important::
+
+   At this point, you can insert images with animations on hover in a module but the effect won't be
+   applied directly after the module installation. As the Website Builder needs to process the image
+   first (transform it then store it as an attachment), the animation on hover will only be visible
+   after you re-select the effect and save the page with the Website Builder.
+
 .. seealso::
-   `Hover effect options
-   <https://github.com/odoo/odoo/blob/c272c49657e8b7865bb93e5f1dcc183cc7d44f17/addons/website/views/snippets/snippets.xml#L694>`_
+   * `Hover effect options (XML) <https://github.com/odoo/odoo/blob/654a1caafc2ab7b2841c372910b2e81dc6e9c035/addons/website/static/src/builder/plugins/options/animate_option.xml#L91>`_
+   * `Image hover plugin (JavaScript) <https://github.com/odoo/odoo/blob/654a1caafc2ab7b2841c372910b2e81dc6e9c035/addons/website/static/src/builder/plugins/image/image_hover_plugin.js>`_
+   * :ref:`Image Shapes: Image processing <website_themes/shapes/img/standard/use>`
+

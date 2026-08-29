@@ -36,6 +36,10 @@ localization:
    * - :guilabel:`Malaysia - E-invoicing`
      - `l10n_my_edi`
      - This module includes the features required for integration with MyInvois under IRBM.
+   * - :guilabel:`Malaysia - E-invoicing (POS)`
+     - `l10n_my_edi_pos`
+     - This module includes the features required to send invoices and consolidated invoices to the
+       MyInvois system when using the POS app.
 
 .. _malaysia/configuration/company:
 
@@ -58,16 +62,74 @@ and select it. Then configure the following fields:
 - :guilabel:`TTx`: Malaysian Tourism Tax Number, if applicable
 - :guilabel:`Phone`
 
+.. _malaysia/sst:
+
+Sales and Service Tax (SST)
+===========================
+
+The **Sales and Service Tax (SST)** is a single-stage tax regime in Malaysia. Default taxes are
+created automatically when the :guilabel:`Malaysia - Accounting` (`l10n_my`) and
+:guilabel:`Malaysia - Accounting Reports` (`l10n_my_reports`) modules are :ref:`installed
+<general/install>`. These :ref:`taxes <malaysia/sst/taxes>` are used to generate the :ref:`tax
+report <malaysia/sst/tax_reports>`.
+
+.. _malaysia/sst/taxes:
+
+Taxes
+-----
+
+The following categories of :doc:`taxes <../accounting/taxes>` are installed and linked to the
+relevant account:
+
+- :guilabel:`Sales and Purchase Goods`: 5% and 10%
+- :guilabel:`Sales and Purchase Services`: 6% and 8%
+- :guilabel:`Exempt`: Sales exempted from tax (e.g., export or specific schedules)
+- :guilabel:`Not Applicable`: 0% NA
+
+.. note::
+   - **Sales and Purchase Services** taxes can be configured for
+     :doc:`Cash Basis <../../finance/accounting/taxes/cash_basis>`.
+   - **0% NA** is applied to transactions where tax is not applicable (out of scope), distinct from
+     legally exempted transactions, but for which an e-invoice is still required.
+
+.. _malaysia/sst/products:
+
+Product
+-------
+
+The :ref:`SST-02 report (Section B1) <malaysia/sst/tax_reports>` uses the Malaysian Tariff or
+Service Code to group transactions. Ensure to configure products correctly:
+
+- For :guilabel:`Goods`: In the :guilabel:`General Information` tab, enter the relevant :abbr:`HS
+  (Harmonized System)` code in the :guilabel:`Malaysian Customs Tariff Code` field.
+- For :guilabel:`Services`: In the :guilabel:`General Information` tab, enter the code corresponding
+  to the service type in the :guilabel:`Malaysian Service Type Code` field.
+
+.. _malaysia/sst/tax_reports:
+
+Tax reports
+-----------
+
+The following tax reports are available under Malaysia localization:
+
+- SST-02 (B1);
+- SST-02 (B2, C, D, E);
+- SST-02A.
+
+To access them, navigate to :menuselection:`Accounting --> Reporting --> Tax Report`.
+
 E-invoicing integration with MyInvois
 =====================================
 
-The MyInvois Portal is a platform provided by the :abbr:`IRBM (Inland Revenue Board of Malaysia)`
+The MyInvois portal is a platform provided by the :abbr:`IRBM (Inland Revenue Board of Malaysia)`
 that facilitates the implementation of e-invoices for Malaysian taxpayers.
 Odoo supports integration with MyInvois to submit the invoices generated in Odoo.
 
 .. note::
-   The :guilabel:`Malaysia - E-invoicing module` must be installed to submit invoices to MyInvois.
-
+   - The :guilabel:`Malaysia - E-invoicing module` (`l10n_my_edi`) must be installed to submit
+     invoices to MyInvois.
+   - Each company in the database requires an individual connection to the MyInvois portal using
+     its own :abbr:`TIN (tax identification number)`.
 .. _malaysia/myinvois/setup:
 
 Set-up
@@ -184,6 +246,12 @@ Access the contact's form and fill in the following fields:
    - :guilabel:`Identification`: the :guilabel:`ID Type` and the corresponding
      :guilabel:`Identification number` of the contact registered on MyTax.
 
+.. note::
+   For specific use cases—such as transactions with buyers without a
+   :abbr:`TIN (tax identification number)` or foreign customers—refer to the list of general TINs
+   provided in the **Appendix** of the `e-Invoice Specific Guideline
+   <https://www.hasil.gov.my/en/e-invoice/reference-for-the-implementation-of-e-invoice/guidelines/>`_.
+
 .. _malaysia/myinvois/setup/odoo/product:
 
 Products
@@ -220,6 +288,10 @@ Send invoices to MyInvois
 Invoices can be sent to MyInvois once they have been confirmed. To do so, click
 :guilabel:`Send to MyInvois`.
 
+.. note::
+   For invoices in foreign currencies, the exchange rate applied to the invoice is sent to
+   :guilabel:`MyInvois`.
+
 Send bills to MyInvois
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -249,8 +321,8 @@ within the :guilabel:`MyInvois` tab.
    from MyInvois.
 
 .. note::
-   Odoo :doc:`automatically checks and updates <../../sales/subscriptions/scheduled_actions>` the
-   status every hour. To update it manually at any time, click :guilabel:`Update MyInvois Status`.
+   Odoo automatically checks and updates the status every hour. To update it manually at any time,
+   click :guilabel:`Update MyInvois Status`.
 
 .. _malaysia/myinvois/workflow/cancellation:
 
@@ -297,6 +369,66 @@ Send debit notes to MyInvois
 :ref:`Issue a debit note from an existing bill or invoice <accounting/credit_notes/issue-debit-note>`
 and click :guilabel:`Send To MyInvois`. In MyInvois, it appears then as a :guilabel:`Debit Note` if
 issued from an invoice or a :guilabel:`Self-billed Debit Note` from a vendor bill.
+
+.. _malaysia/myinvois/pos_workflow:
+
+POS workflow
+------------
+
+Two workflows are available to issue e-invoices in :doc:`Point of Sale <../../sales/point_of_sale>`:
+
+- :ref:`Individual e-invoice <malaysia/myinvois/pos_workflow/submit>`: Issue an e-invoice
+  immediately for a specific order using the customer's details.
+- :ref:`Consolidated e-invoice <malaysia/myinvois/pos_workflow/consolidated>`: Create orders as
+  usual, then aggregate them periodically into a single consolidated e-invoice.
+
+.. _malaysia/myinvois/pos_workflow/submit:
+
+Individual e-invoice
+~~~~~~~~~~~~~~~~~~~~
+
+To issue an individual e-invoice and send it to MyInvois,
+:doc:`create an invoice </applications/sales/point_of_sale/use/pos_invoices>`, and ensure the
+selected customer has a valid :abbr:`TIN (tax identification number)` or **Identification Number**.
+
+.. note::
+   If the QR code does not appear on the invoice, the MyInvois validation is still in progress.
+   Odoo automatically retrieves the status in the background. Simply reopen the invoice later to
+   retrieve the validated version with the QR code.
+
+.. _malaysia/myinvois/pos_workflow/consolidated:
+
+Consolidated e-invoice
+~~~~~~~~~~~~~~~~~~~~~~
+
+Orders that are not e-invoiced individually can be aggregated into a consolidated e-invoice.
+
+#. Navigate to :menuselection:`Point of Sale --> Orders --> Consolidated Invoice`.
+#. Click :guilabel:`Consolidate Orders` and set the :guilabel:`Date From` and :guilabel:`Date To`.
+#. Click :guilabel:`Submit to MyInvois`.
+
+Odoo automatically fetches all eligible POS orders within that timeframe that have not been
+individually :ref:`invoiced <malaysia/myinvois/pos_workflow/submit>` nor
+:ref:`refunded <malaysia/myinvois/pos_workflow/refund>`.
+
+.. note::
+   Orders belonging to an :ref:`open POS register <pos/use/open-register>` are not included in the
+   consolidation. :ref:`Close the register <pos/use/register-close>` to include them.
+
+To submit the consolidation, click :guilabel:`Submit to MyInvois` on the form view.
+For multiple records, click :guilabel:`Consolidated Invoices` to go back to the list view, and
+select the relevant consolidated invoices. Then, click :guilabel:`Submit to MyInvois`.
+Consolidated e-invoices are issued to the pre-configured :guilabel:`General Public` contact.
+
+.. _malaysia/myinvois/pos_workflow/refund:
+
+Refunds
+~~~~~~~
+
+To refund a customer, :ref:`process a return <pos/use/refund>`.
+
+Refunds for orders e-invoiced individually or via consolidation must be issued as e-invoices
+(Refund Notes). To do so, click :guilabel:`Invoice` before processing the refund.
 
 Access invoices via QR code
 ---------------------------

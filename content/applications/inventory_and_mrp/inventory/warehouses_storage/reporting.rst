@@ -11,4 +11,4 @@ Reporting
    reporting/stock
    reporting/locations
    reporting/moves_history
-   reporting/aging
+   reporting/dashboards

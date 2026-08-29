@@ -75,10 +75,10 @@ Payroll localization modules are available for the countries listed below.
 - Bangladesh
 - :doc:`Egypt <payroll_localizations/egypt>`
 - :doc:`Hong Kong <payroll_localizations/hong_kong>`
-- India
+- :doc:`India <payroll_localizations/india>`
 - Indonesia
 - :doc:`Jordan <payroll_localizations/jordan>`
-- Kenya
+- :doc:`Kenya <payroll_localizations/kenya>`
 - Lithuania
 - Luxembourg
 - Malaysia
@@ -88,10 +88,10 @@ Payroll localization modules are available for the countries listed below.
 - Pakistan
 - Poland
 - Romania
-- Saudi Arabia
+- :doc:`Saudi Arabia <payroll_localizations/saudi_arabia>`
 - Slovakia
 - Switzerland
-- Türkiye
+- :doc:`Türkiye <payroll_localizations/turkey>`
 - :doc:`United Arab Emirates <payroll_localizations/united_arab_emirates>`
 - :doc:`United States <payroll_localizations/united_states>`
 
@@ -102,8 +102,12 @@ Payroll localization modules are available for the countries listed below.
    payroll_localizations/belgium
    payroll_localizations/egypt
    payroll_localizations/hong_kong
+   payroll_localizations/india
    payroll_localizations/jordan
+   payroll_localizations/kenya
    payroll_localizations/mexico
+   payroll_localizations/saudi_arabia
+   payroll_localizations/turkey
    payroll_localizations/united_arab_emirates
    payroll_localizations/united_states
    payroll_localizations/employment_hero

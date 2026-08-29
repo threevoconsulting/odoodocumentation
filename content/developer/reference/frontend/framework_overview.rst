@@ -199,10 +199,10 @@ Components and Hooks
 --------------------
 
 :ref:`Components <frontend/components>` and :ref:`hooks <frontend/hooks>` are ideas coming from the
-`Owl component system <https://github.com/odoo/owl/blob/master/doc/readme.md>`_.
+`Owl component system <https://github.com/odoo/owl/blob/master/doc/v2/readme.md>`_.
 Odoo components are simply owl components that are part of the web client.
 
-`Hooks <https://github.com/odoo/owl/blob/master/doc/reference/hooks.md>`_ are a
+`Hooks <https://github.com/odoo/owl/blob/master/doc/v2/reference/hooks.md>`_ are a
 way to factorize code, even if it depends on lifecycle. This is a
 composable/functional way to inject a feature in a component. They can be seen
 as a kind of mixin.
@@ -503,7 +503,7 @@ Bus
 The web client :ref:`environment <frontend/framework/environment>` object contains an event
 bus, named `bus`. Its purpose is to allow various parts of the system to properly
 coordinate themselves, without coupling them. The `env.bus` is an owl
-`EventBus <https://github.com/odoo/owl/blob/master/doc/reference/event_bus.md>`_,
+`EventBus <https://github.com/odoo/owl/blob/master/doc/v2/reference/event_bus.md>`_,
 that should be used for global events of interest.
 
 
@@ -650,3 +650,54 @@ users). The `tests` mode is then useful to be able to run these tours.
 
 .. seealso::
     - `Owl Repository <https://github.com/odoo/owl>`_
+
+Tooltips
+========
+
+Since the web client runs in a browser, tooltips can be displayed using the
+usual `title` attribute.  However, this approach has the following drawbacks:
+these tooltips cannot be styled, they must be pure text, and they cannot be
+customized in any way (e.g., adding a delay for them to show up and close, or
+adjusting their position).
+
+To solve these issues, the Odoo web framework provides a standard way to display
+tooltips using some special data attributes:
+
+.. code-block:: xml
+
+    <button data-tooltip="This is a tooltip">Do something</button>
+
+
+The ideal position of the tooltip can be specified thanks to the attribute
+`data-tooltip-position`. It should be one of the following strings: `top`, `bottom`,
+`left`, or `right`. The opening delay (in milliseconds) can be modified with the
+`data-tooltip-delay` attribute (default: `400`).
+
+.. code-block:: xml
+
+    <button data-tooltip="This is a tooltip" data-tooltip-position="left" data-tooltip-delay="0">
+      Do something
+    </button>
+
+For advanced tooltips containing dynamic and/or HTML content, the
+`data-tooltip-template` and `data-tooltip-info` attributes can be used.
+For example, let's suppose we have the following qweb template:
+
+.. code-block:: xml
+
+    <t t-name="some_template">
+      <ul>
+        <li>info.x</li>
+        <li>info.y</li>
+      </ul>
+    </t>
+
+This template can then be used in a tooltip as follows:
+
+.. code-block:: xml
+
+    <button data-tooltip-template="some_template" data-tooltip-info="info">
+      Do something
+    </button>
+
+with `info` being a stringified object with two keys, `x` and `y`.

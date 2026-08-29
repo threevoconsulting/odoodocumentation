@@ -168,7 +168,7 @@ Schedule section
 
 - :guilabel:`Work Entry Source`: Select :guilabel:`Working Schedule`, which creates :doc:`work
   entries <../work_entries>`  based on the employee's assigned :ref:`working schedule
-  <payroll/working-times>` (e.g., 40 hours per week).
+  <employees/schedule>` (e.g., 40 hours per week).
 
   .. note::
      The Mexico payroll localization is currently not able to create work entries from the
@@ -417,7 +417,7 @@ Any :ref:`discrepencies or conflicts <payroll/conflicts>` must be resolved, then
 can be :ref:`regenerated <payroll/regenerate-work-entries>`.
 
 Once everything is correct, draft payslips can be :ref:`created individually <payroll/process>` or
-in :doc:`batches <../batches>`, referred to in the **Payroll** app as *Pay Runs*.
+in :doc:`groups <../pay_runs>`, referred to in the **Payroll** app as *Pay Runs*.
 
 .. image:: mexico/mexico-work-entries.png
    :alt: The work entries for a pay run, with some time off entered in the work entries.

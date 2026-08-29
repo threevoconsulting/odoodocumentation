@@ -82,9 +82,6 @@ the Ecuadorian localization:
    be installed automatically. Any missing modules can be manually
    :doc:`installed </applications/general/apps_modules>`.
 
-.. seealso::
-   :doc:`/applications/hr/payroll/payroll_localizations` are documented separately.
-
 .. _localizations/ecuador/specifics:
 
 Localization overview
@@ -809,7 +806,7 @@ to set the :guilabel:`SRI Payment Method` for each method.
 Automatic invoice
 -----------------
 
-:ref:`Invoices <handling/legal>` can be generated after the checkout process.
+:ref:`Invoices <ecommerce/handling/invoices>` can be generated after the checkout process.
 
 .. tip::
    The invoice's email template can be modified from the :guilabel:`Invoice Email Template` field
@@ -867,8 +864,8 @@ Invoicing flows
 Identification type and number
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The P0S cashier can :ref:`create a new contact for a customer <pos/customers>` who requests an
-invoice from an open POS session.
+The P0S cashier can :ref:`create a new contact for a customer <pos/use/customers>` who requests an
+invoice from the POS register.
 
 The *Ecuadorian Module for Point of Sale* adds two new fields to the contact creation form:
 :guilabel:`Identification Type` and :guilabel:`Tax ID`.
@@ -890,7 +887,7 @@ customer as :guilabel:`Consumidor Final` and generates an electronic invoice any
 .. note::
    If the client requests a credit note due to a return of this type of purchase, the credit note
    should be made using the client's real contact information. Credit notes cannot be created for
-   *Consumidor Final* and can be managed :ref:`directly from the POS session <pos/refund>`.
+   *Consumidor Final* and can be managed :ref:`directly from the POS register <pos/use/refund>`.
 
 .. _localizations/ecuador/specific-customer:
 
@@ -902,4 +899,4 @@ with their fiscal information. This ensures the invoice is generated with accura
 
 .. note::
    If the client requests a credit note due to a return of this type of purchase, the credit note
-   and return process can be managed :ref:`directly from the POS session <pos/refund>`.
+   and return process can be managed :ref:`directly from the POS register <pos/use/refund>`.

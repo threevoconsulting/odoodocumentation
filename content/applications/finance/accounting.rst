@@ -18,7 +18,7 @@ as standard financial reports, bank reconciliation, budgets, asset management, a
       :target: accounting/get_started
       :large:
 
-      Basic concepts of accounting and initial setup of your accounting
+      Detailed instructions for the initial setup of your accounting
 
    .. card:: Taxes
       :target: accounting/taxes
@@ -121,9 +121,9 @@ accounting and reporting rules, including the following:
   :doc:`main currency <accounting/get_started/multi_currency>`, and :doc:`taxes <accounting/taxes>`
   apply to all branches.
 - Branches can manage their own dedicated journals and related records.
-- The parent company manages a common :ref:`fiscal period <year-end/fiscal-years>`, so its
-  :ref:`lock and closing dates <year-end/lock-everything-date>` apply across all branches. However,
-  branches may set earlier lock dates if needed.
+- The parent company manages a common :ref:`fiscal period <accounting/year-end/fiscal-years>`, so
+  its :ref:`lock and closing dates <accounting/year-end/lock-everything-date>` apply across all
+  branches. However, branches may set earlier lock dates if needed.
 - The parent company can access all :doc:`reports <accounting/reporting>`, :doc:`invoices
   <accounting/customer_invoices>`, :doc:`bills <accounting/vendor_bills>`, etc., from its branches,
   while each branch can only view its own data.
@@ -253,8 +253,8 @@ real-time:
 Tax return
 ----------
 
-In the :ref:`Tax return <tax-returns/report>`, Odoo computes all accounting transactions for the
-specific tax period and uses these totals to calculate the tax obligation.
+In the :ref:`Tax return <accounting/tax-returns/report>`, Odoo computes all accounting transactions
+for the specific tax period and uses these totals to calculate the tax obligation.
 
 .. note::
    Depending on the country's localization, an XML version of the tax report can be generated to be
@@ -278,11 +278,11 @@ Inventory valuation
 ===================
 
 Both periodic (manual) and perpetual (automated) inventory valuations are supported in Odoo. The
-available methods are standard price, average price, :abbr:`LIFO (Last-In, First-Out)` and
-:abbr:`FIFO (First-In, First-Out).`
+available methods are Standard Price, Average Cost (AVCO), and First In First Out (FIFO).
 
 .. seealso::
-   :doc:`../inventory_and_mrp/inventory/product_management/inventory_valuation/inventory_valuation_config`
+   :doc:`Inventory valuation <accounting/get_started/inventory_valuation>`
+   :doc:`../inventory_and_mrp/inventory/inventory_valuation/cheat_sheet`
 
 .. _accounting/retained-earnings:
 
@@ -310,17 +310,28 @@ Configuration --> Settings`. When enabled:
 - :guilabel:`Invoice Date` and :guilabel:`Bill Date` are pre-filled when encoding a transaction.
 - A :guilabel:`Quick encoding` option is available for customer invoices and vendor bills.
 
+.. _accounting/share-invoices:
+
+Share invoices with external accountants
+========================================
+
+Odoo offers multiple ways to share invoices and bills with an external accountant, including
+the abilities to :ref:`grant access rights <accounting/accountant-access-rights>` to your database,
+to :ref:`automatically send copies of a journal's invoices or bills <accounting/send-copy>` to a
+specified email address, and to :ref:`download ZIP files <accounting/zip>` containing all invoices
+and all bills.
+
 .. _accounting/accountant-access-rights:
 
 Accountant access rights
-========================
+------------------------
 
 To grant access to the company's accountant, :ref:`add the accountant as a new user
 <users/add-individual>` and configure the appropriate :doc:`access rights
 <../general/users/access_rights>` in the :guilabel:`Accounting` section to enable access to the
 company's financial data:
 
-- :guilabel:`Accounting`: Select :guilabel:`Accountant`.
+- :guilabel:`Accounting`: Select :guilabel:`Administrator`.
 - :guilabel:`Bank`: Allow bank account validation.
 
 .. Note::
@@ -332,6 +343,42 @@ company's financial data:
    `Odoo's pricing <https://www.odoo.com/pricing-plan>`_.
 
 For a multi-company environment, set the appropriate :ref:`access <users/multi-companies>`.
+
+.. _accounting/send-copy:
+
+Send copies of a journal's invoices or bills
+--------------------------------------------
+
+Sales and purchase type journals can be used to send all of their invoices and bills to external
+email addresses. These records are sent in XML format.
+
+To configure a journal to automatically send its records to a specified email address, follow these
+steps:
+
+#. Navigate to :menuselection:`Accounting --> Configuration --> Journals`.
+#. Open the desired journal.
+#. In the :guilabel:`Advanced Settings` tab, enter an email address in the :guilabel:`Send Copy To`
+   field.
+
+.. note::
+   Multiple email addresses can be entered. Separate them with `;` without a space (i.e.:
+   `sample1@example.com;sample2@example.com`).
+
+.. _accounting/zip:
+
+ZIP file export
+---------------
+
+Groups of invoices and bills can be exported in ZIP files. To export invoices or bills in ZIP files,
+follow these steps:
+
+#. Navigate to :menuselection:`Accounting --> Customers --> Invoices` or :menuselection:`Accounting
+   --> Vendors --> Bills`.
+#. Select the invoices or bills to be included in the ZIP file.
+#. Click :icon:`fa-print` :guilabel:`Print` menu, and click :guilabel:`Export ZIP`.
+
+Once the ZIP file is exported, it can be sent to an external accountant to provide them with all the
+information of your invoices and bills.
 
 .. toctree::
    :titlesonly:

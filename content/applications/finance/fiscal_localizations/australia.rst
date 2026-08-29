@@ -24,17 +24,17 @@ Modules
        Activity Statement (BAS) <australia/bas>` report. It is installed automatically when the
        :guilabel:`Australia` :ref:`fiscal localization package <fiscal_localizations/packages>` is
        selected.
-   * - :guilabel:`Australia - Payroll`
-     - `l10n_au_hr_payroll`
-     - The base :ref:`payroll <payroll/l10n_au/payroll>` module for the Australian localization.
-   * - :guilabel:`Australia - Payroll with Accounting`
-     - `l10n_au_hr_payroll_account`
-     - Contains the necessary accounting data for the Australian payroll rules. It is installed
-       automatically when the :ref:`Payroll Entries option <payroll-accounting>` is enabled.
-   * - :guilabel:`Employment Hero Payroll`
-     - `l10n_employment_hero`
-     - Synchronizes all pay runs from :ref:`Employment Hero <payroll/l10n_au/employment-hero>`
-       with Odoo's journal entries.
+
+.. note::
+   - It is not possible for users of the Australian fiscal localization to deactivate
+     :doc:`two-factor authentication (2FA) <../../general/users/2fa>` as it is required by the
+     Australian government.
+   - The localization automatically :ref:`installs <general/install>` core modules. A manual
+     :doc:`update <../../general/apps_modules>` may be required for missing elements or updates.
+
+.. seealso::
+   :doc:`Australian Payroll localization documentation
+   <../../hr/payroll/payroll_localizations/australia>`
 
 .. _australia/accounting:
 
@@ -273,7 +273,8 @@ taxes are accurately captured and reflected within the report.
 
 The module incorporates built-in rules that facilitate the automatic calculation of taxes for types
 W1 to W5. For a detailed walkthrough and more information on the calculation process for these
-taxes, refer to the :ref:`Payroll section <payroll/l10n_au/payroll>`.
+taxes, refer to the :doc:`Australian Payroll localization documentation
+<../../hr/payroll/payroll_localizations/australia>`.
 
 Closing
 *******

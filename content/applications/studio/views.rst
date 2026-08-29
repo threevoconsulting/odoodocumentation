@@ -53,15 +53,24 @@ contacts, sales orders, products, etc.
   - :guilabel:`Call a method`: specify an existing Python method already defined in Odoo.
 
 - To change a button's label or style, click the button and edit its :guilabel:`Label` or
-  :guilabel:`Class` (either `btn-primary` or `btn-secondary`) in the :guilabel:`Properties` tab.
+  :guilabel:`Class` (either `btn-primary` for a *primary* button or `btn-secondary` for a
+  *secondary* button) in the :guilabel:`Properties` tab.
+
+  .. tip::
+     *Primary* buttons represent the main action(s) the user can take in a specific view, e.g.,
+     :guilabel:`Send` a request for quotation, and are more visually prominent. *Secondary* buttons
+     offer alternative or less common actions, e.g., :guilabel:`Print` or :guilabel:`Preview` a
+     request for quotation, and are less visually prominent. By default, a new button is styled as a
+     secondary button.
+
 - To add a smart button, click the :icon:`fa-plus-square` (:guilabel:`plus`) icon in the top-right
   corner of the form. Enter a :guilabel:`Label`, choose an :guilabel:`Icon`, and select a
   :ref:`related field <studio/fields/relational-fields-related-field>`.
 
 .. example::
 
-   .. image:: views/form-sales-order.png
-      :alt: Sales order model's Form view
+   .. image:: views/form-new-quotation.png
+      :alt: Quotation Template model's Form view
 
 .. _studio/views/general/activity:
 
@@ -156,12 +165,19 @@ records, and edit simple records.
     be executed from the dropdown list;
   - :guilabel:`Call a method`: specify an existing Python method already defined in Odoo.
 
-.. tip::
-   To add a :icon:`oi-draggable` (:guilabel:`drag handle`) icon to reorder records manually, add an
-   :ref:`Integer field <studio/fields/simple-fields-integer>` with the :guilabel:`Handle` widget.
+The widths of columns in a :guilabel:`List` :icon:`oi-view-list` view are computed automatically to
+provide the optimal user experience. However, it is also possible to set a fixed column width per
+field. To do so, click on the relevant column to open the field's :icon:`fa-server`
+:guilabel:`Properties` tab, then enter the desired number of pixels in the :guilabel:`Column Width
+(px)` field.
 
-   .. image:: views/list-drag-handle.png
-      :alt: Drag handle icon enabling to sort records manually in List view
+.. tip::
+   To add a :icon:`oi-draggable` (:guilabel:`drag handle`) icon to reorder records manually, add
+   an :ref:`Integer field <studio/fields/simple-fields-integer>` with the :guilabel:`Handle`
+   widget.
+
+     .. image:: views/list-drag-handle.png
+        :alt: Drag handle icon enabling to sort records manually in List view
 
 .. example::
 

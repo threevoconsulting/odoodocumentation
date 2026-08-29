@@ -57,15 +57,15 @@ Started developer tutorial </developer/tutorials/server_framework_101>`.
 
             .. code-block:: console
 
-               $ git clone https://github.com/odoo/odoo.git
-               $ git clone https://github.com/odoo/enterprise.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch https://github.com/odoo/odoo.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch https://github.com/odoo/enterprise.git
 
          .. tab:: Clone with SSH
 
             .. code-block:: console
 
-               $ git clone git@github.com:odoo/odoo.git
-               $ git clone git@github.com:odoo/enterprise.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch git@github.com:odoo/odoo.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch git@github.com:odoo/enterprise.git
 
    .. group-tab:: Windows
 
@@ -75,15 +75,15 @@ Started developer tutorial </developer/tutorials/server_framework_101>`.
 
             .. code-block:: doscon
 
-               C:\> git clone https://github.com/odoo/odoo.git
-               C:\> git clone https://github.com/odoo/enterprise.git
+               C:\> git clone --branch {CURRENT_BRANCH} --single-branch https://github.com/odoo/odoo.git
+               C:\> git clone --branch {CURRENT_BRANCH} --single-branch https://github.com/odoo/enterprise.git
 
          .. tab:: Clone with SSH
 
             .. code-block:: doscon
 
-               C:\> git clone git@github.com:odoo/odoo.git
-               C:\> git clone git@github.com:odoo/enterprise.git
+               C:\> git clone --branch {CURRENT_BRANCH} --single-branch git@github.com:odoo/odoo.git
+               C:\> git clone --branch {CURRENT_BRANCH} --single-branch git@github.com:odoo/enterprise.git
 
    .. group-tab:: Mac OS
 
@@ -93,15 +93,15 @@ Started developer tutorial </developer/tutorials/server_framework_101>`.
 
             .. code-block:: console
 
-               $ git clone https://github.com/odoo/odoo.git
-               $ git clone https://github.com/odoo/enterprise.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch https://github.com/odoo/odoo.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch https://github.com/odoo/enterprise.git
 
          .. tab:: Clone with SSH
 
             .. code-block:: console
 
-               $ git clone git@github.com:odoo/odoo.git
-               $ git clone git@github.com:odoo/enterprise.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch git@github.com:odoo/odoo.git
+               $ git clone --branch {CURRENT_BRANCH} --single-branch git@github.com:odoo/enterprise.git
 
 .. note::
    **The Enterprise git repository does not contain the full Odoo source code**. It is only a
@@ -263,6 +263,127 @@ PostgreSQL user.
       .. note::
          Because the PostgreSQL user has the same name as the Unix login, it is possible to connect
          to the database without a password.
+
+.. note::
+   If you want to use **Odoo's AI features**, the `pg-vector` PostgreSQL extension is required.
+
+   Note that `pg-vector` is available only for PostgreSQL version 15 and up.
+
+   .. tabs::
+
+      .. group-tab:: Linux
+
+         #. Navigate to your temporary folder
+
+            .. code-block:: console
+
+               $ cd /tmp
+
+         #. Clone the `pg-vector` `GitHub repository <https://github.com/pgvector/pgvector>`_:
+
+            .. code-block:: console
+
+               $ git clone https://github.com/pgvector/pgvector.git
+
+         #. Navigate into the directory:
+
+            .. code-block:: console
+
+               $ cd pgvector
+
+         #. Compile the extension:
+
+            .. code-block:: console
+
+               $ make
+
+         #. Install the extension:
+
+            .. code-block:: console
+
+               $ sudo make install
+
+         If you run into any issues during installation, make sure to check the official
+         `installation notes <https://github.com/pgvector/pgvector#installation-notes---linux-and-mac>`__.
+
+      .. group-tab:: Mac OS
+
+         #. Navigate to your temporary folder
+
+            .. code-block:: console
+
+               $ cd /tmp
+
+         #. Clone the `pg-vector` `GitHub repository <https://github.com/pgvector/pgvector>`_:
+
+            .. code-block:: console
+
+               $ git clone https://github.com/pgvector/pgvector.git
+
+         #. Navigate into the directory:
+
+            .. code-block:: console
+
+               $ cd pgvector
+
+         #. Compile the extension:
+
+            .. code-block:: console
+
+               $ make
+
+         #. Install the extension:
+
+            .. code-block:: console
+
+               $ sudo make install
+
+         If you run into any issues during installation, make sure to check the official
+         `installation notes <https://github.com/pgvector/pgvector#installation-notes---linux-and-mac>`__.
+
+      .. group-tab:: Windows
+
+         #. Navigate to your temporary folder
+
+            .. code-block:: console
+
+               $ cd %TEMP%
+
+         #. Clone the `pg-vector` `GitHub repository <https://github.com/pgvector/pgvector>`_:
+
+            .. code-block:: console
+
+               $ git clone https://github.com/pgvector/pgvector.git
+
+         #. Navigate into the directory:
+
+            .. code-block:: console
+
+               $ cd pgvector
+
+         #. Ensure C++ support in Visual Studio is installed and run `x64 Native Tools
+            Command Prompt for VS [version]` as administrator.
+
+         #. Set your `PGROOT` environment variable:
+
+            .. code-block:: console
+
+               $ set "PGROOT=C:\Program Files\PostgreSQL\[Your PostgreSQL Version]"
+
+         #. Compile the extension:
+
+            .. code-block:: console
+
+               $ nmake /F Makefile.win
+
+         #. Install the extension:
+
+            .. code-block:: console
+
+               $ nmake /F Makefile.win install
+
+         If you run into any issues during installation, make sure to check the official
+         `installation notes <https://github.com/pgvector/pgvector#installation-notes---windows>`__.
 
 .. _install/dependencies:
 

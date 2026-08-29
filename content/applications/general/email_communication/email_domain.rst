@@ -138,7 +138,7 @@ SPF, DKIM and DMARC documentation of common providers
 
 - `OVH DNS <https://docs.ovh.com/us/en/domains/web_hosting_how_to_edit_my_dns_zone/>`_
 - `GoDaddy TXT record <https://www.godaddy.com/help/add-a-txt-record-19232>`_
-- `GoDaddy SPF, DKIM, or DMARC records <https://www.godaddy.com/help/set-up-spf-dkim-or-dmarc-records-for-my-hosting-email-40810>`_
+- `GoDaddy CNAME record <https://www.godaddy.com/help/add-a-cname-record-19236>`_
 - `NameCheap <https://www.namecheap.com/support/knowledgebase/article.aspx/317/2237/how-do-i-add-txtspfdkimdmarc-records-for-my-domain/>`_
 - `CloudFlare DNS <https://support.cloudflare.com/hc/en-us/articles/360019093151>`_
 - `Squarespace DNS records <https://support.squarespace.com/hc/en-us/articles/360002101888-Adding-custom-DNS-records-to-your-Squarespace-managed-domain>`_
@@ -149,7 +149,4 @@ gives a full overview of the content and configuration in one sent email. Mail-T
 used to configure records for other, lesser-known providers.
 
 .. seealso::
-   - `Using Mail-Tester to set SPF Records for specific carriers
-     <https://www.mail-tester.com/spf/>`_
-   - `Magic Sheet - SPF, DKIM and DMARC configuration [PDF]
-     <https://drive.google.com/drive/folders/1TJIXQpdR0VN8UQx5JP7q7vFuAr3e1Q3r>`_
+   `Using Mail-Tester to set SPF Records for specific carriers <https://www.mail-tester.com/spf/>`_

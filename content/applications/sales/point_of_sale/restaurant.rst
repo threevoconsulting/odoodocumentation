@@ -1,3 +1,5 @@
+:show-content:
+
 ===================
 Restaurant features
 ===================
@@ -9,7 +11,7 @@ Odoo Point of Sale provides various features to manage a restaurant or a bar:
 - :ref:`Notifying the kitchen or bar through the POS <pos/restaurant/orders-printing>`;
 - :ref:`Printing and splitting bills <pos/restaurant/bills>`;
 - :ref:`Collecting tips <pos/restaurant/tips>`;
-- :doc:`Setting different taxes for takeout orders <pricing/fiscal_position>`.
+- :ref:`Setting different taxes for takeout orders <pos/pricing/taxes>`.
 
 Three main buttons in the POS interface allow for navigating between tables, the register, and
 orders:
@@ -21,13 +23,21 @@ orders:
 
 .. important::
    To configure restaurant-specific settings, the :guilabel:`Is a Bar/Restaurant` setting under the
-   :guilabel:`Point of Sale` section must be enabled in the :ref:`POS settings
-   <configuration/settings>`.
+   :guilabel:`Point of Sale` section must be enabled in the :ref:`POS settings <pos/use/settings>`.
 
 .. note::
-   When :guilabel:`Booking` is enabled in the :ref:`POS settings <configuration/settings>`, a
+   When :guilabel:`Booking` is enabled in the :ref:`POS settings <pos/use/settings>`, a
    :ref:`Booking <pos/restaurant/floors/booking>` button appears on the main interface for viewing
    and managing bookings.
+
+.. cards::
+
+   .. card:: Online food delivery
+      :target: restaurant/urban_piper
+      :large:
+
+      Integrate third-party delivery platforms via UrbanPiper to centralize and manage external
+      orders directly within the POS.
 
 .. _pos/restaurant/default:
 
@@ -35,7 +45,7 @@ Default start screen
 ====================
 
 To define the point of sale's default start screen, go to the :ref:`POS settings
-<configuration/settings>`, scroll down to the :guilabel:`PoS Interface` section, and set the
+<pos/use/settings>`, scroll down to the :guilabel:`PoS Interface` section, and set the
 :guilabel:`Default Screen` setting to :guilabel:`Tables` (i.e., :ref:`Floor plan
 <pos/restaurant/floors>` view) or :ref:`Register <pos/restaurant/orders>`.
 
@@ -61,10 +71,9 @@ buttons:
    - Selecting a table on the :guilabel:`Floor plan` view or accessing it through the
      :guilabel:`Table Selector` automatically confirms the table's occupancy.
    - To order free physical QR codes adapted to the floor plan, activate the :doc:`QR menu
-     </applications/sales/point_of_sale/self_order>` setting, then click  :icon:`fa-qrcode`
-     :guilabel:`Get QR Codes` in the :guilabel:`Floor plan` view. This `offer
-     <https://www.odoo.com/app/point-of-sale-restaurant-qr-code>`_ is available worldwide and for
-     all subscription types.
+     <extra/self_order>` setting, then click  :icon:`fa-qrcode` :guilabel:`Get QR Codes` in the
+     :guilabel:`Floor plan` view. This `offer <https://www.odoo.com/app/point-of-sale-restaurant-qr-code>`_
+     is available worldwide and for all subscription types.
 
 .. example::
    .. image:: restaurant/plan-understand.png
@@ -115,15 +124,15 @@ plan`:
 
 .. tip::
    To create a :guilabel:`Floor plan` quickly, go to the :guilabel:`Point of Sale` section of the
-   :ref:`POS settings <configuration/settings>`. Under :guilabel:`Floors & Tables Map`, type the
-   floor name in the :guilabel:`Floors` field, and press `Enter`.
+   :ref:`POS settings <pos/use/settings>`. Under :guilabel:`Floors & Tables Map`, type the floor
+   name in the :guilabel:`Floors` field, and press `Enter`.
 
 .. _pos/restaurant/floors/frontend:
 
 From the POS frontend
 ~~~~~~~~~~~~~~~~~~~~~
 
-To create floors and tables from the frontend, :ref:`open the POS register <pos/session-start>`,
+To create floors and tables from the frontend, :ref:`open the POS register <pos/use/open-register>`,
 click the :icon:`fa-bars` (:guilabel:`hamburger menu`) icon in the top right corner of the
 :guilabel:`Floor plan` view, then :guilabel:`Edit Plan`. To configure the :guilabel:`Floor plan`,
 follow the next steps:
@@ -170,8 +179,8 @@ Booking configuration
 
 To enable and configure the bookings, follow these steps:
 
-#. Go to the :ref:`POS settings <configuration/settings>`, scroll down to the :guilabel:`PoS
-   Interface` section, and enable :guilabel:`Booking`.
+#. Go to the :ref:`POS settings <pos/use/settings>`, scroll down to the :guilabel:`PoS Interface`
+   section, and enable :guilabel:`Booking`.
 #. Enter a name in the :guilabel:`Appointment type` field and click :guilabel:`Create and edit`.
 #. Configure the :ref:`Appointment type <appointments/configure>` form and click :guilabel:`Save`.
 #. Click :guilabel:`Save` in the POS settings.
@@ -213,7 +222,7 @@ Order management
 ================
 
 The POS register allows for :ref:`processing <pos/restaurant/orders/process>` and :ref:`transferring
-<pos/restaurant/floors/transfer>` orders, defining :ref:`presets <pos/restaurant/orders/preset>`,
+<pos/restaurant/floors/transfer>` orders, defining :doc:`presets <extra/presets>`,
 and managing :ref:`courses <pos/restaurant/orders/courses>`.
 
 .. _pos/restaurant/orders/process:
@@ -229,12 +238,12 @@ To process an order from the POS register, follow these steps:
    - Click :guilabel:`Set Table` to link the order to a table. Enter a table number and click
      :guilabel:`Assign`.
    - Click :guilabel:`Set Tab` to enter the open order's name and click :guilabel:`Apply`.
-#. Click :guilabel:`Order` to validate the order.
 
-When ready, :ref:`process the order payment <pos/restaurant/bills/payment>`.
+#. Click :guilabel:`Send` to validate the order.
+#. When ready, :ref:`process the order payment <pos/restaurant/bills/payment>`.
 
 .. note::
-   Clicking :guilabel:`Order` redirects to the :ref:`Floor plan <pos/restaurant/floors>` view if
+   Clicking :guilabel:`Send` redirects to the :ref:`Floor plan <pos/restaurant/floors>` view if
    :guilabel:`Tables` is selected as the :ref:`default start screen <pos/restaurant/default>`.
 
 .. tip::
@@ -247,6 +256,15 @@ When ready, :ref:`process the order payment <pos/restaurant/bills/payment>`.
      available when the cart is empty.
    - :ref:`Configure a printer <pos/restaurant/orders-printing>` to send an order to the kitchen
      printer when clicking :guilabel:`Order`.
+   - Use :doc:`presets <extra/presets>` when offering different service types, e.g., :guilabel:`Dine
+     In`, :guilabel:`Takeout`, or :guilabel:`Delivery`.
+   - If the order is a direct sale not linked to any table, its name can be modified by clicking the
+     :icon:`fa-ellipsis-v` (:guilabel:`Actions`) menu and selecting :icon:`fa-pencil-square-o`
+     :guilabel:`Edit Order Name`.
+
+.. seealso::
+   - :doc:`extra/preparation`
+   - :doc:`UrbanPiper order management for food delivery <restaurant/urban_piper>`
 
 .. _pos/restaurant/floors/transfer:
 
@@ -259,35 +277,6 @@ the target table in the :ref:`Floor plan <pos/restaurant/floors>` view:
 
    - Select an available table to transfer customers and their orders.
    - Select an occupied table to merge customers and their orders.
-
-.. _pos/restaurant/orders/preset:
-
-Presets
--------
-
-Presets are used to apply preconfigured settings to orders and determine whether an order is for
-:guilabel:`Dine In`, :guilabel:`Takeout`, or :guilabel:`Delivery`. They also control whether
-customer contact information is required and apply capacity limits based on opening hours and order
-quantity.
-
-To use preconfigured presets, go to the :ref:`POS settings <configuration/settings>` and
-enable the :guilabel:`Take out / Delivery / Members` setting under the :guilabel:`Point of Sale`
-section. Set the :guilabel:`Default` field to the preferred preset, then save. From the
-:ref:`register <pos/restaurant/orders>`, select the relevant preset, and :ref:`process the order
-<pos/restaurant/orders/process>`:
-
-- :guilabel:`Dine In`: Assign a :ref:`table or open a tab <pos/restaurant/orders/process>`.
-- :guilabel:`Takeout`: Enter the order's name and click :guilabel:`Apply`, then select a date
-  and a time slot.
-- :guilabel:`Delivery`: Select an existing customer, or click :guilabel:`Create` to add one. Then,
-  select a time slot.
-
-.. tip::
-   Click the preset button to switch to another one.
-
-.. seealso::
-   - :doc:`/applications/sales/point_of_sale/preparation`
-   - :doc:`/applications/sales/point_of_sale/online_food_delivery`
 
 .. _pos/restaurant/orders/courses:
 
@@ -318,7 +307,7 @@ Order printing
 ==============
 
 To enable sending orders to a kitchen or a bar printer, :doc:`connect a printer
-<configuration/epos_printers>` to Odoo, go to the :ref:`POS settings <configuration/settings>`, and
+<hardware_network/receipt_printers>` to Odoo, go to the :ref:`POS settings <pos/use/settings>`, and
 follow these steps:
 
 #. Scroll down to the :guilabel:`Preparation` section and enable the :guilabel:`Preparation
@@ -331,13 +320,13 @@ follow these steps:
      </applications/general/iot/devices/printer>`. This process requires the IoT app and an IoT
      system.
    - If using an :doc:`Epson printer that does not require an IoT system connection
-     <configuration/epos_printers>`, select :guilabel:`Use an Epson printer` and enter the
+     <hardware_network/receipt_printers>`, select :guilabel:`Use an Epson printer` and enter the
      :guilabel:`Epson Printer IP Address`.
 #. Define the product categories to be printed by clicking :guilabel:`Add a line` in the
    :guilabel:`Printed Product Categories` field and selecting the preferred category from the
    popover.
 #. Click :guilabel:`Save`.
-#. In the :ref:`POS settings <configuration/settings>`, click :guilabel:`Save`.
+#. In the :ref:`POS settings <pos/use/settings>`, click :guilabel:`Save`.
 
 The printer is then connected to the point of sale and can print kitchen orders and order receipts.
 
@@ -349,19 +338,20 @@ The printer is then connected to the point of sale and can print kitchen orders 
      image, determine the product availability, then click :guilabel:`Save & Close`.
 
 .. tip::
-   - To access all preparation printers from the :ref:`POS settings <configuration/settings>`,
-     scroll down to the :guilabel:`Preparation` section and click :icon:`oi-arrow-right`
-     :guilabel:`Printers`. Alternatively, go to :menuselection:`Point of Sale --> Orders -->
-     Preparations Printers`.
+   - To access all preparation printers from the :ref:`POS settings <pos/use/settings>`, scroll down
+     to the :guilabel:`Preparation` section and click :icon:`oi-arrow-right` :guilabel:`Printers`.
+     Alternatively, go to :menuselection:`Point of Sale --> Orders --> Preparations Printers`.
    - After :ref:`processing an order <pos/restaurant/orders/process>`, click the :icon:`fa-cutlery`
      (:guilabel:`order`) icon in the :ref:`POS register <pos/restaurant/orders>` next to
      :guilabel:`Payment` to reprint a duplicate of the last kitchen order.
+   - Access the :doc:`preparation display <extra/preparation>` through the **Kitchen Display** app
+     to manage orders without using paper.
 
 .. seealso::
-   - :doc:`Connect an IoT system to a POS <configuration/pos_iot>`
+   - :doc:`Connect an IoT system to a POS <hardware_network/pos_iot>`
    - :doc:`/applications/general/iot/devices/printer`
    - :doc:`/applications/general/iot/connect`
-   - :doc:`/applications/sales/point_of_sale/preparation`
+   - :doc:`extra/preparation`
 
 .. _pos/restaurant/bills:
 
@@ -420,11 +410,11 @@ After a successful :ref:`order payment <pos/restaurant/bills/payment>`, click :i
 :guilabel:`Print Full Receipt` to generate and print a bill.
 
 .. important::
-   If a printer is :doc:`configured and linked <configuration/epos_printers>` to a point of sale,
+   If a printer is :doc:`configured and linked <hardware_network/receipt_printers>` to a point of sale,
    the receipt is automatically printed upon payment confirmation.
 
 .. seealso::
-   :doc:`/applications/sales/point_of_sale/receipts_invoices`
+   :doc:`/applications/sales/point_of_sale/use/pos_invoices`
 
 .. _pos/restaurant/tips:
 
@@ -434,15 +424,19 @@ Tips
 Configuration
 -------------
 
-To allow tipping in a POS, go to the :ref:`POS settings <configuration/settings>`, scroll down to
-the :guilabel:`Payment` section, enable :guilabel:`Tips`, and click :guilabel:`Save`.
+To allow tipping in a POS, go to the :ref:`POS settings <pos/use/settings>`, scroll down to the
+:guilabel:`Payment` section, enable :guilabel:`Tips`, and click :guilabel:`Save`.
 
 .. important::
-   - The :guilabel:`Add tip after payment` setting only works for a POS in the United States
-     of America with an :doc:`Adyen <payment_methods/terminals/adyen>` or a :doc:`Stripe
-     <payment_methods/terminals/stripe>` :ref:`payment terminal <pos/terminals/configuration>`.
-   - The :guilabel:`Add tip through payment terminal (Adyen)` setting only works with an
-     :ref:`Adyen <adyen/tips>` terminal.
+   Depending on your hardware setup and geographical location, enable the following options as
+   relevant:
+
+   - :guilabel:`Add tip through payment terminal (Adyen)`: Only works with an :doc:`Adyen
+     <payment_methods/terminals/adyen>` card terminal.
+   - :ref:`Add tip after payment <pos/restaurant/tips-after-payment>`: Only works for a POS in the
+     United States of America with an :doc:`Adyen <payment_methods/terminals/adyen>` or a
+     :doc:`Stripe <payment_methods/terminals/stripe>` :ref:`payment terminal
+     <pos/terminals/configuration>`.
 
 .. note::
    - Saving the :guilabel:`Tips` setting automatically fills the :guilabel:`Tip product` field
@@ -468,12 +462,14 @@ To process a tip during :ref:`payment <pos/restaurant/bills/payment>`, follow th
    :icon:`fa-heart` :guilabel:`Tip`, add the tip amount, and click :guilabel:`Ok`.
    Finally, :guilabel:`Validate` the payment.
 
+.. _pos/restaurant/tips-after-payment:
+
 Tip after payment (US only)
 ---------------------------
 
 To allow tipping after payment for a POS in the United States of America, ensure the :guilabel:`Add
-tip after payment` setting is enabled in the :ref:`POS settings <configuration/settings>`. To
-process tips after payment, follow these steps:
+tip after payment` setting is enabled in the :ref:`POS settings <pos/use/settings>`. To process tips
+after payment, follow these steps:
 
 #. On the :guilabel:`Payment` screen, select a :guilabel:`Card` payment method linked to a
    :doc:`Stripe <payment_methods/terminals/stripe>` or :doc:`Adyen
@@ -484,3 +480,8 @@ process tips after payment, follow these steps:
    - :guilabel:`No Tip`.
    - :guilabel:`Tip Amount`: Enter the relevant amount in the field.
 #. Click :guilabel:`Settle` to validate.
+
+.. toctree::
+   :titlesonly:
+
+   restaurant/urban_piper

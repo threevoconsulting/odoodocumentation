@@ -10,7 +10,7 @@ working more overtime <attendances/overtime>`, and who is :ref:`not working thei
 View report
 ===========
 
-To view the attendance report, click :guilabel:`Reporting` in the top menu. The default report
+To view the attendances report, click :guilabel:`Reporting` in the top menu. The default report
 displays attendance information for current employees over the past three months, in a default
 :icon:`oi-view-pivot` :guilabel:`Pivot table`. The rows are populated by employee, while the columns
 are populated by the various attendance records. All entries are grouped by month.
@@ -26,8 +26,8 @@ The columns presented are:
 - :guilabel:`Balance`: The difference between the *approved* overtime, and the *total* overtime
   worked.
 
-To present different information, adjust the :ref:`filters and groups <attendances/filters-groups>`
-in the same way as in the :guilabel:`Overview` dashboard.
+To present different information, adjust the filters and groups in the same way as in the
+:guilabel:`Overview` dashboard.
 
 .. image:: attendance_ reporting/reporting.png
    :alt: The default report view, with all the optional view buttons highlighted.

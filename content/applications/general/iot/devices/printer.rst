@@ -15,15 +15,24 @@ control point or a quality check.
 Connection
 ==========
 
-IoT systems support printers connected through USB, network connection, or Bluetooth.
-`Supported printers <https://www.odoo.com/page/iot-hardware>`__ are detected automatically, and
+IoT systems support printers connected through USB or network connection.
+`Supported printers <https://www.odoo.com/page/iot-hardware>`_ are detected automatically, and
 appear in the :guilabel:`Devices` list of the IoT app.
 
 .. image:: printer/printer-detected.png
    :alt: The printer as it would appear in the IoT app devices list.
 
+.. important::
+   Printers connecting to the IoT system via the network must be on the **same network** as the IoT
+   system.
+
 .. note::
-   Printers can take up to two minutes to appear in the IoT app :guilabel:`Devices` list.
+   Printers can take up to two minutes to appear in the IoT app's :guilabel:`Devices` list.
+
+.. tip::
+   To test the printer, open the IoT app, click the :ref:`IoT system's card <iot/connect/IoT-form>`,
+   select the printer device, then click :guilabel:`Test`. A successful test prints a test page. If
+   no page is printed, ensure the printer is powered on and the connection is correct.
 
 Link a printer
 ==============
@@ -236,10 +245,10 @@ the `ESC *` command as follows:
 #. Click :guilabel:`Add Printer`. If everything was done correctly, the page should redirect to the
    :guilabel:`Banners` page.
 #. Wait a few minutes for the IoT system to detect the printer and sync to Odoo's server.
-#. :ref:`Access the POS settings <configuration/settings>` and select your POS, or click the
-   vertical ellipsis button (:guilabel:`⋮`) on a POS card and click :guilabel:`Edit`. Scroll down
-   to the :guilabel:`Connected Devices` section, enable :guilabel:`IoT Box`, and select the printer
-   in the :guilabel:`Receipt Printer` field. Click :guilabel:`Save`.
+#. :ref:`Access the POS settings <pos/use/settings>` and select your POS, or click the vertical
+   ellipsis button (:guilabel:`⋮`) on a POS card and click :guilabel:`Edit`. Scroll down to the
+   :guilabel:`Connected Devices` section, enable :guilabel:`IoT Box`, and select the printer in the
+   :guilabel:`Receipt Printer` field. Click :guilabel:`Save`.
 
 .. note::
    If the printer was set up incorrectly (e.g., it continues to print random text, or the printed
@@ -352,12 +361,14 @@ Additionally, a new printer needs to be added to reduce the print delay that occ
 the driver.
 
 .. important::
-   The DYMO LabelWriter 450 DUO printer is the recommended DYMO printer for use with Odoo and IoT
-   systems. This device combines two printers: a label printer and a tape printer. When configuring
-   the following processes, it is essential to select the correct model (either DYMO LabelWriter 450
-   DUO Label (en) or DYMO LabelWriter 450 DUO Tape (en)). For consistency, the following processes
-   outline configuration steps for the DYMO LabelWriter 450 DUO Label (en) model. Adjust the model
-   selections as needed.
+   - The DYMO LabelWriter 450 DUO printer is the recommended DYMO printer for use with Odoo and IoT
+     systems. This device combines two printers: a label printer and a tape printer. When
+     configuring the following processes, it is essential to select the correct model (either DYMO
+     LabelWriter 450 DUO Label (en) or DYMO LabelWriter 450 DUO Tape (en)). For consistency, the
+     following processes outline configuration steps for the DYMO LabelWriter 450 DUO Label (en)
+     model. Adjust the model selections as needed.
+   - DYMO Series 5 printers are not compatible with the :doc:`IoT box <../iot_box>` and
+     require pairing with a :doc:`Windows virtual IoT <../windows_iot>`.
 
 .. _printer/dymo/update_drivers:
 
@@ -469,7 +480,7 @@ Nothing happens when a barcode is scanned
 -----------------------------------------
 
 Make sure the correct device is selected in the :doc:`Point of Sale settings
-</applications/sales/point_of_sale/configuration/pos_iot>` (when applicable) and the barcode is
+</applications/sales/point_of_sale/hardware_network/pos_iot>` (when applicable) and the barcode is
 configured to send an `ENTER` character (keycode 28) at the end of every barcode.
 
 The barcode scanner is detected as a keyboard

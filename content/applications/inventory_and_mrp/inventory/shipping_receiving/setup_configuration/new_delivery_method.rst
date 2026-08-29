@@ -12,14 +12,14 @@ product, and the shipping details can be added to the delivery order.
 Configuration
 -------------
 
-To configure delivery methods, go to :menuselection:`Inventory app --> Configuration --> Delivery
+To configure delivery methods, go to :menuselection:`Inventory --> Configuration --> Delivery
 Methods`.
 
 .. note::
    If the :guilabel:`Delivery Methods` option is not available from the :guilabel:`Configuration`
    drop-down menu, verify whether the feature is enabled by following these steps:
 
-   #. Go to :menuselection:`Inventory app --> Configuration --> Settings`.
+   #. Go to :menuselection:`Inventory --> Configuration --> Settings`.
    #. Scroll to the :guilabel:`Shipping` section and enable the :guilabel:`Delivery Methods` feature
       by checking the corresponding checkbox.
 
@@ -33,19 +33,26 @@ a form to provide details about the shipping provider, including:
 
 - :guilabel:`Delivery Method` (*Required field*): the name of the delivery method (e.g. `flat-rate
   shipping`, `same day delivery`, etc.).
-- :guilabel:`Website`: configure shipping methods for an **eCommerce** page. Select the applicable
-  website from the drop-down menu, or leave it blank to apply the method to all web pages.
+- :guilabel:`Website`: configure shipping methods for an :doc:`e-commerce
+  </applications/websites/ecommerce/shipping>` page. Select the applicable
+  website from the drop-down menu, or leave it blank to apply the method to all web pages. This
+  field only appears when the **eCommerce** app is enabled.
 - :guilabel:`Provider` (*Required field*): choose the delivery service, like FedEx, if using a
   :ref:`third-party carrier <inventory/shipping/third_party>`. Ensure the integration with the
   shipping carrier is properly installed and select the provider from the drop-down menu. For more
   details on configuring custom shipping methods, such as :ref:`fixed price
   <inventory/shipping/fixed>` or :ref:`based on rules <inventory/shipping/rules>` options, refer to
   their respective sections below.
+- :guilabel:`Cash on Delivery`: allow customers to choose the :ref:`Cash on Delivery
+  <payment_providers/inperson_payments/cash_on_delivery>` payment method when selecting this
+  delivery option on the ecommerce website.
 - :guilabel:`Company`: If the shipping method should apply to a specific company, select it from the
-  drop-down menu. Leave the field blank to apply the method to all companies.
+  drop-down menu. Leave the field blank to apply the method to all companies. This field only
+  appears in multi-company databases.
 - :guilabel:`Routes`: select the applicable routes to define different delivery methods, such as
-  standard or express shipping, based on varying lead times. For more information, jump to the
-  :ref:`Set routes on shipping method <inventory/shipping_receiving/shipping-route>` section.
+  standard or express shipping, based on varying lead times. This field only appears when you have
+  enabled multi-step routes in your inventory configuration settings. For more information, refer to
+  the :ref:`Set routes on shipping method <inventory/shipping_receiving/shipping-route>` section.
 - :guilabel:`Delivery Product` (*Required field*): the product listed on the :ref:`sales order line
   <inventory/shipping/sales-order>` as the delivery charge.
 - :guilabel:`Free if order amount is above`: checking this box enables free shipping if the customer
@@ -53,6 +60,17 @@ a form to provide details about the shipping provider, including:
 - :guilabel:`Tracking Link`: This option adds a link to the portal so the customer can track their
   delivery. When a custom carrier is added in a delivery order, the tracking button is enabled, and
   the link directs to the tracking portal with that URL.
+
+.. example::
+   To set up `$200` flate-rate shipping, fill in the following fields:
+
+   - :guilabel:`Delivery Method`: `Furniture Delivery (Manual)`
+   - :guilabel:`Provider`: :guilabel:`Fixed Price`
+   - :guilabel:`Fixed Price`: `200`
+   - :guilabel:`Delivery Product`: :guilabel:`Furniture Delivery (manual)`
+
+   .. image:: new_delivery_method/sample-delivery-method.png
+      :alt: Set up a delivery method with a fixed price of 200.
 
 .. _inventory/shipping_receiving/availability:
 
@@ -76,7 +94,7 @@ For examples on how to configure specific shipping methods, refer to the section
 Fixed price
 -----------
 
-To configure a shipping price that is the same for all orders, go to :menuselection:`Inventory app
+To configure a shipping price that is the same for all orders, go to :menuselection:`Inventory
 --> Configuration --> Delivery Methods`. Then, click :guilabel:`New`, and on the shipping method
 form, set the :guilabel:`Provider` to the :guilabel:`Fixed Price` option. Selecting this option
 makes the :guilabel:`Fixed Price` field become available, which is where the fixed rate shipping
@@ -128,6 +146,8 @@ To restrict shipping to specific destinations on the **eCommerce** website, in t
 form, navigate to the :guilabel:`Destination Availability` tab and define the :guilabel:`Countries`,
 :guilabel:`States`, and :guilabel:`Zip Prefixes`. Leave these fields empty if all locations apply.
 
+.. _inventory/shipping/calculate-delivery-cost:
+
 Calculate delivery cost
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -172,7 +192,7 @@ different :doc:`routes <../daily_operations/use_routes>` for it.
    - in-store pickup or home delivery: ship from the central warehouse, or pick from the store's
      stock, depending on customer selection.
 
-To set up routes, go to :menuselection:`Inventory app --> Configuration --> Routes`. Click
+To set up routes, go to :menuselection:`Inventory --> Configuration --> Routes`. Click
 :guilabel:`New`, or select the desired route.
 
 On the route form, in the :guilabel:`Applicable On` section, tick the :guilabel:`Shipping Methods`
@@ -183,7 +203,7 @@ checkbox.
 
    Routes form with the :guilabel:`Shipping Method` checkbox ticked.
 
-Then, go to :menuselection:`Inventory app --> Configuration --> Delivery Methods`, and select the
+Then, go to :menuselection:`Inventory --> Configuration --> Delivery Methods`, and select the
 desired shipping method.
 
 On the shipping method form, in the :guilabel:`Routes` field, select the available fulfillment

@@ -18,8 +18,8 @@ Worldline
 Worldline configuration
 =======================
 
-First, enable the Worldline payment terminal in the :ref:`POS settings <configuration/settings>`
-under :guilabel:`Payment Terminals`. Then :doc:`connect the IoT system to Odoo
+First, enable the Worldline payment terminal in the :ref:`POS settings <pos/use/settings>` under
+:guilabel:`Payment Terminals`. Then :doc:`connect the IoT system to Odoo
 </applications/general/iot/connect>` and follow these steps on the terminal:
 
 #. **Configure the ECR protocol**:
@@ -54,6 +54,8 @@ The terminal is now active and displays the **Read card** screen.
 .. tip::
    To check the terminal's connection status, open the IoT app and click the :ref:`IoT system's
    card <iot/connect/IoT-form>`.
+   Then, click the :guilabel:`Test` button: a test transaction is sent to the terminal to
+   to ensure the connection is properly established.
 
 .. _pos/worldline/odoo-configuration:
 

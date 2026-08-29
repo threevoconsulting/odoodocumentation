@@ -15,8 +15,8 @@ Configuration
 To allow customers to pay using their customer account, :doc:`create a payment method
 <../payment_methods>` and configure it as follows:
 
-#. Enable :guilabel:`Identify Customer` to force the :ref:`selection of a customer <pos/customers>`
-   to allow using this payment method.
+#. Enable :guilabel:`Identify Customer` to force the :ref:`selection of a customer
+   <pos/use/customers>` to allow using this payment method.
 #. Keep the :guilabel:`Journal` field blank to use the customer's receivable account.
 #. Select the points of sale where this payment method is available in the :guilabel:`Point of Sale`
    field.
@@ -60,7 +60,7 @@ To use the customer account as a payment method for a purchase from the POS paym
 
 .. important::
    To effectively monitor and manage the customer’s unpaid debt, either :doc:`create an invoice
-   <../receipts_invoices>` for the order or install the :doc:`Accounting application
+   <../use/pos_invoices>` for the order or install the :doc:`Accounting application
    <../../../finance/accounting>`.
 
 Debt tracking
@@ -68,13 +68,13 @@ Debt tracking
 
 When a customer pays using their customer account, the purchase amount is recorded as debt until it
 is paid off. To keep track of a customer’s debt, consult their customer statement in the backend or
-their profile in an open session.
+their customer profile from the POS register.
 
 To access the :guilabel:`Customer Statement` report, go to :menuselection:`Point of Sale --> Orders
 --> Customers`, select a customer to open their form, and click the :guilabel:`Customer Statements`
 smart button.
 
-To view the total amount due or deposited by a customer from an open session, access the customer
+To view the total amount due or deposited by a customer from the POS register, access the customer
 list by clicking :guilabel:`Customer` and search for the desired customer; the amount due or
 deposited is displayed next to their name.
 

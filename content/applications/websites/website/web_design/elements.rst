@@ -21,7 +21,7 @@ To add or modify a website element:
    The default styles for headings, buttons, links, and paragraph text, for example, are defined in
    the :doc:`Theme tab <themes>` of the website editor.
 
-.. image:: elements/webdesign-elements.png
+.. image:: elements/elements-webdesign.png
    :alt: Type / to add website elements.
 
 .. _website/elements/titles:
@@ -96,6 +96,7 @@ To add a video, type `/video`, insert the URL, and turn on the desired options:
 - :guilabel:`Loop`: to play the video on a loop.
 - :guilabel:`Hide player controls`
 - :guilabel:`Hide fullscreen button`
+- :guilabel:`Start at`: to define the timestamp where the video should start, in `MM:SS` format.
 
 .. _website/elements/icons:
 

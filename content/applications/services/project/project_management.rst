@@ -1,5 +1,4 @@
 :show-content:
-:hide-page-toc:
 
 ==================
 Project management
@@ -77,7 +76,7 @@ option:
 - :guilabel:`All internal users`: All internal users can access the project and all of its tasks.
 - :guilabel:`Invited portal users and all internal users (public)`: All internal users can access
   the project and all of its tasks. When following a project, :doc:`portal users
-  </applications/general/users/portal>` only have access to the specific tasks they are following.
+  </applications/general/users/user_portals>` only have access to the specific tasks they are following.
   This option is selected by default.
 
 Inviting external users
@@ -157,3 +156,6 @@ You can also create your own buttons to access more specific views:
 
    project_management/project_dashboard
    project_management/project_profitability
+   project_management/project_milestones
+   project_management/project_templates
+

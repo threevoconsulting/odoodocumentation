@@ -135,9 +135,16 @@ spreadsheet via the :guilabel:`File` menu:
 - :icon:`os-copy-file` :guilabel:`Make a copy`: creates a duplicate of the current spreadsheet with
   the same :ref:`regional settings <spreadsheet/get-started/manage-spreadsheets-locale>` (or
   locale).
-- :icon:`os-save` :guilabel:`Save as template`: allows the current spreadsheet to be used as a
-  :ref:`template <spreadsheet/get-started/templates>` for future spreadsheets.
-- :icon:`os-download` :guilabel:`Download`: downloads the spreadsheet in `.xlsx` format.
+- :icon:`fa-share-alt` :guilabel:`Share`: allows you to configure access rights to the spreadsheet
+  and :guilabel:`Share` it with specific users or copy a shareable link. For a spreadsheet
+  containing dynamic Odoo data that needs to be shared with a user who does not have the
+  appropriate access rights to the data, it is possible to :guilabel:`Freeze and share` the
+  spreadsheet.
+
+  .. seealso::
+     :ref:`Access and sharing <spreadsheet/collaboration/access-sharing>`
+
+- :icon:`fa-download` :guilabel:`Download`: downloads the spreadsheet in `.xlsx` format.
 
   .. important::
      When you download a spreadsheet in `.xlsx` format, any spreadsheet formulas that retrieve Odoo
@@ -148,14 +155,23 @@ spreadsheet via the :guilabel:`File` menu:
   .. tip::
      Users with :guilabel:`Viewer` rights can also download a spreadsheet in `.xlsx` format.
 
+- :icon:`fa-print` :guilabel:`Print`: prints a copy of the spreadsheet on a connected printer.
+- :icon:`os-save` :guilabel:`Save as template`: allows the current spreadsheet to be used as a
+  :ref:`template <spreadsheet/get-started/templates>` for future spreadsheets.
+- :icon:`fa-trash` :guilabel:`Move to trash`: moves the spreadsheet to the trash folder of the
+  Documents app
+
+  .. tip::
+     Items in the trash folder are permanently deleted after 30 days.
+
+- :icon:`os-add-to-dashboard` :guilabel:`Add to dashboard`: :ref:`converts
+  <spreadsheet/get-started/convert-to-dashboard>` the current spreadsheet into an
+  :doc:`Odoo dashboard <../dashboards>`.
 - :icon:`os-version-history` :guilabel:`See version history`: provides read-only :ref:`access to
   previous versions <spreadsheet/get-started/manage-spreadsheets-versioning>` of the current
   spreadsheet, which can be named and restored if needed.
-- :icon:`fa-print` :guilabel:`Print`: prints a copy of the spreadsheet on a connected printer.
 - :icon:`os-cog` :guilabel:`Settings`: allows you to view and change the :ref:`locale
   <spreadsheet/get-started/manage-spreadsheets-locale>` of the current spreadsheet.
-- :icon:`os-add-to-dashboard` :guilabel:`Add to dashboard`: :ref:`converts
-  <spreadsheet/get-started/convert-to-dashboard>` the current spreadsheet into an Odoo dashboard.
 
 .. _spreadsheet/get-started/manage-spreadsheets-versioning:
 
@@ -249,3 +265,33 @@ spreadsheet into a dashboard that is then accessible via
    - After a spreadsheet has been converted to a dashboard, it is deleted from Odoo Documents. Any
      subsequent :ref:`modifications <build_and_customize_dashboards/customize>` need to be made via
      Odoo Dashboards.
+
+.. _spreadsheet/get-started/specs-limits:
+
+Sheet specifications and limits
+===============================
+
+.. important::
+   The number of columns and rows per sheet can affect spreadsheet performance. However, the main
+   factor is often the nature of the formulas used and the ranges they need to scan. In particular,
+   formulas that create quadratic behavior, where formulas copied down many rows each scan a large
+   range, can severely impact performance in large datasets.
+
+A new sheet in an Odoo spreadsheet contains 26 columns (i.e., columns A-Z) and 100 rows by default.
+Additional columns and rows can be added according to your needs, keeping the following points in
+mind:
+
+- **Columns**: While there is no technical limit on the number of columns that can be *displayed* in
+  a sheet, formulas in Odoo Spreadsheet only support 3-letter column references, which means that a
+  formula referencing, e.g., column AAAA, will result in an error.
+
+  The practical limit on the number of columns per sheet is therefore 18,278 columns (i.e., up to
+  column ZZZ).
+- **Rows**: There is no fixed limit on the number of rows a sheet can contain.
+
+  .. tip::
+     To quickly add a maximum of 10,000 rows to the bottom of the sheet in one go, scroll to the
+     bottom of the sheet, enter the desired number of rows, then click :guilabel:`Add`.
+
+- **Cells and characters per cell**: There is no fixed limit on the number of cells a sheet can
+  contain, nor on the number of characters within a cell.

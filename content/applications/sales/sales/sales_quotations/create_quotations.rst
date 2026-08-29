@@ -66,6 +66,8 @@ To view and/or modify any listed quotation from the :guilabel:`Quotations` dashb
 desired quotation line from the list, and Odoo reveals the specific form for that selected
 quotation.
 
+.. _sales/create-quotation:
+
 Create quotation
 ================
 
@@ -148,7 +150,8 @@ newly-selected catalog items can be found in the :guilabel:`Order Lines` tab.
 
 If multiple items should be presented in a more organized way on the quotation, click :guilabel:`Add
 a section`, enter a name for the section, and drag-and-drop that section heading in the desired
-location amongst the items in the :guilabel:`Order Lines` tab. The section heading appears in bold.
+location amongst the items in the :guilabel:`Order Lines` tab. The section heading appears in bold
+and a sub-total for all products in a section is displayed.
 
 If needed, click :guilabel:`Add a note` beneath a certain product line to add a custom note about
 that specific product. The note appears in italics. Then, if needed, proceed to drag-and-drop the
@@ -162,6 +165,7 @@ shipping`.
    - :doc:`../products_prices/ewallets_giftcards`
    - :doc:`../products_prices/loyalty_discount`
    - :doc:`../products_prices/prices/pricing`
+   - :doc:`../../../essentials/product_catalog`
 
 Optional Products tab
 ---------------------

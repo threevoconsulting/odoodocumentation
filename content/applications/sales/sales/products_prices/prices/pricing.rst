@@ -2,9 +2,10 @@
 Pricelists
 ==========
 
-A *pricelist* is a method of dynamic pricing that applies a list of prices (or price rules) to
-adjust sales prices. This adjustment can apply to specific customers, customer groups, sales orders,
-time periods, etc., and is useful for creating pricing strategies and optimizing sales margins.
+A *pricelist* is a method of dynamic pricing that applies a list of prices (or price rules) that
+overrides the sales price on a product's product form. This adjustment can set to apply to all
+products sold or tailored to only apply to specific customers, customer groups, sales orders, time
+periods, etc., and is useful for creating pricing strategies and optimizing sales margins.
 
 Odoo **Sales** has a useful pricelist feature that can be tailored to fit any unique pricing
 strategy. Pricelists suggest certain prices, but they can always be overridden on the sales order.
@@ -34,18 +35,14 @@ modified at any time.
 
 .. important::
    If there is no specific pricelist configured on a sales quotation, the :guilabel:`Default`
-   pricelist is applied.
+   pricelist is applied. The :guilabel:`Default` pricelist is the first pricelist found in
+   :menuselection:`Sales app --> Products --> Pricelists` without an assigned :guilabel:`Country
+   Group`. Odoo will read the :guilabel:`Pricelist Name` column from top to bottom to determine the
+   :guilabel:`Default` pricelist.
 
 .. note::
    The :guilabel:`Selectable` column is only applicable to Odoo **eCommerce**. This option allows
    website visitors to choose a pricelist when shopping in your **eCommerce** website.
-
-.. note::
-   In Odoo 17 (and above), you are *not required* to enter a pricelist in the :guilabel:`Pricelist`
-   field on a sales quotation form in order to confirm it (i.e. turn it into a sales order).
-
-   The chatter section is available on pricelist forms, which allows you to add notes and
-   communications on each pricelist page.
 
 Creating and editing pricelists
 -------------------------------
@@ -73,9 +70,11 @@ Price Rules tab
 ---------------
 
 In the :guilabel:`Price Rules` tab, each line creates a new record that will implement customized
-pricing to the sales order where the pricelist is applied. To create a new price rule, click on
-:guilabel:`Add a line`, which opens a new pricelist rules form.
+pricing to the sales order where the pricelist is applied. This can be used to create complex
+pricing structures, such as progressive discounts when greater quantities of a product are
+purchased.
 
+To create a new price rule, click on :guilabel:`Add a line`, which opens a new pricelist rules form.
 Then, select whether to apply this set of rules to a :guilabel:`Product` or :guilabel:`Category`.
 
 From here, there are several configuration options:
@@ -175,7 +174,6 @@ and :guilabel:`Pricing` options. When the configurations are complete, click the
 Close` button.
 
 .. image:: pricing/time-period-popup.png
-   :align: center
    :alt: Custom time period pop-up form in Odoo Sales.
 
 Lastly, add the desired price for this recurring price rule in the :guilabel:`Recurring Price`
@@ -202,7 +200,7 @@ Lastly, configure a :guilabel:`Price` for the rental rule in the respective colu
    :alt: The rental tab in a pricelist configuration form.
 
 .. seealso::
-   :doc:`Ecommerce price configuration </applications/websites/ecommerce/products/prices>`
+   :doc:`Ecommerce price configuration </applications/websites/ecommerce/configuration/prices>`
 
 .. _sales/products/customer-pricelist-application:
 
@@ -217,7 +215,6 @@ app --> Orders --> Customers` and selecting the customer from the main :guilabel
 or by clicking on the customer's name on a sales order.
 
 .. image:: pricing/customer-detail-form.png
-   :align: center
    :alt: Sample customer detail form in Odoo Sales.
 
 On the desired customer's contact form, under the :guilabel:`Sales & Purchase` tab, in the
@@ -225,7 +222,6 @@ On the desired customer's contact form, under the :guilabel:`Sales & Purchase` t
 the drop-down menu in the :guilabel:`Pricelist` field.
 
 .. image:: pricing/customer-form-pricelist-field.png
-   :align: center
    :alt: The pricelist field in a customer detail form in Odoo Sales.
 
 .. note::
@@ -271,4 +267,4 @@ rule on a fresh form.
 
 .. seealso::
    - :doc:`/applications/sales/sales/products_prices/prices/currencies`
-   - :doc:`/applications/websites/ecommerce/products/prices`
+   - :doc:`/applications/websites/ecommerce/configuration/prices`

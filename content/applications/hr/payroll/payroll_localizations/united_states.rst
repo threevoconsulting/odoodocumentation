@@ -7,14 +7,51 @@ employer payroll taxes. It accounts for federal and state regulations.
 
 The states included in this localization are:
 
-- California (CA)
-- New York (NY)
-- Texas (TX)
-- Florida (FL)
-- Colorado (CO)
-- Alabama (AL)
-- Washington (WA)
-- Nevada (NV)
+.. list-table::
+   :header-rows: 1
+
+   * - State
+     - Abbreviation
+   * - Alabama
+     - (AL)
+   * - Arizona
+     - (AZ)
+   * - California
+     - (CA)
+   * - Colorado
+     - (CO)
+   * - Florida
+     - (FL)
+   * - Georgia
+     - (GA)
+   * - Idaho
+     - (ID)
+   * - Illinois
+     - (IL)
+   * - Iowa
+     - (IA)
+   * - Mississippi
+     - (MS)
+   * - Nevada
+     - (NV)
+   * - New Jersey
+     - (NJ)
+   * - New York
+     - (NY)
+   * - North Carolina
+     - (NC)
+   * - Oregon
+     - (OR)
+   * - Texas
+     - (TX)
+   * - Vermont
+     - (VT)
+   * - Virginia
+     - (VA)
+   * - Washington
+     - (WA)
+   * - Washington, D.C.
+     - \(DC)
 
 .. note::
    Federal taxes (Income, :abbr:`FICA (Federal Insurance Contributions Act)`, and Unemployment) for
@@ -163,7 +200,7 @@ Schedule section
   payroll during the specified pay period. The options are:
 
   - :guilabel:`Working Schedule`: Based on the employee's assigned :ref:`working schedule
-    <payroll/working-times>` (e.g., 40 hours per week).
+    <employees/schedule>` (e.g., 40 hours per week).
   - :guilabel:`Attendances`: Based on :doc:`approved checked-in hours
     <../../attendances/management>` in the **Attendances** app.
   - :guilabel:`Planning`: Based on :ref:`scheduled shifts <planning/shifts>` in the **Planning**
@@ -437,7 +474,7 @@ Any :ref:`discrepencies or conflicts <payroll/conflicts>` must be resolved, then
 can be :ref:`regenerated <payroll/regenerate-work-entries>`.
 
 Once everything is correct, draft payslips can be :ref:`created individually <payroll/process>` or
-in :doc:`batches <../batches>`, referred to in the **Payroll** app as *Pay Runs*.
+in :doc:`groups <../pay_runs>`, referred to in the **Payroll** app as *Pay Runs*.
 
 .. image:: united_states/work-entries.png
    :alt: The work entries for a pay run, with some time off entered in the work entries.

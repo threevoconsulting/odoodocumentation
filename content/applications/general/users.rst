@@ -58,11 +58,40 @@ User` or :guilabel:`Portal User`.
 Odoo databases have three types of users: :guilabel:`Internal User`, :guilabel:`Portal`, and
 :guilabel:`Public`. Users are considered *internal database* users. Portal users are *external
 users*, who only have access to the database portal to view records. Public users are those visiting
-websites, via the website's frontend. See the documentation on :doc:`users/portal`.
+websites, via the website's frontend. See the documentation on :doc:`users/user_portals`.
 
 The :guilabel:`Portal` user option does **not** allow the administrator to choose access rights.
 These users have specific access rights pre-set (such as, record rules and restricted menus), and
 usually do not belong to the usual Odoo groups.
+
+User devices
+============
+
+For security purposes, when a user logs into the database, the various login information, such as
+the IP address, is stored in the user's profile. It is best practice to check this periodically, to
+ensure all access is from the user, and no one else has accessed the database.
+
+To check the logged-in devices, click the user icon in the upper-right corner, and click
+:guilabel:`My Preferences` to open the user's profile. Click the *Security* tab to view a
+list of all devices the user has logged into the database with. Any device currently logged into the
+system displays a green circle next to the device name on the Kanban card.
+
+.. image:: users/devices.png
+   :alt: The Kanban view of all user devices.
+
+Revoke devices
+--------------
+
+If a listed device is **not** a legitimate user device and could be a potential security risk,
+remove the device and revoke access by clicking the :guilabel:`Log out` button.
+
+An :guilabel:`Access Control` pop-up window loads, requesting the user to confirm their identity.
+Enter the user's password, then click :guilabel:`Confirm Password`.
+
+The device disappears from the *Security* tab and can no longer be used to log into the database.
+
+.. image:: users/security.png
+   :alt: The security pop-up window asking to verify the account with a password.
 
 .. _users/deactivate:
 
@@ -75,12 +104,6 @@ Manage Users`. Then, tick the checkbox to the left of the users to be deactivate
 After selecting the appropriate user to be archived, click the :icon:`fa-cog` :guilabel:`(Actions)`
 icon, and select :guilabel:`Archive` from the resulting drop-down menu. Then, click :guilabel:`OK`
 from the :guilabel:`Confirmation` pop-up window that appears.
-
-.. danger::
-   **Never** deactivate the main/administrator user (admin). Making changes to admin users can have
-   a detrimental impact on the database. This includes *impotent admin*, which means that no user in
-   the database can make changes to the access rights. For this reason, Odoo recommends contacting
-   an Odoo Business Analyst, or our Support Team, before making changes.
 
 Error: too many users
 ---------------------
@@ -119,12 +142,10 @@ Password management is an important part of granting users autonomous access to 
 times. Odoo offers a few different methods to reset a user's password.
 
 .. tip::
-   Odoo has a setting to specify the length needed for a password. This setting can be accessed by
-   navigating to :menuselection:`Settings app --> Permissions` section, and entering the desired
-   password length in the :guilabel:`Minimum Password Length` field. By default the value is `8`.
-
-.. image:: users/minimum-password-length.png
-   :alt: Minimum Password Length highlighted in the Permissions section of General Settings.
+   To enforce a minimum password length requirement, :ref:`install <general/install>` the
+   :guilabel:`Password Policy` (`auth_password_policy`) module. Then, open the :guilabel:`Settings`
+   app, navigate to the *Permissions* section, and enter the desired password length in the
+   :guilabel:`Minimum Password Length` field. By default, the value is `8`.
 
 .. _users/reset-password:
 
@@ -199,27 +220,26 @@ database can be re-accessed using the new password.
 
 .. _users/multi-companies:
 
-Multi Companies
+Multi companies
 ===============
 
-The :guilabel:`Multi Companies` field on a user form allows an administrator to provide access to
-multiple companies for users. To configure a multi-company environment for a user, navigate to the
-desired user by going to: :menuselection:`Settings app --> Users section --> Manage users`. Then,
-select the user to open their user form, and configure with multi-company access.
+The :guilabel:`Companies` field on a user form determines which companies a user can access. To
+configure multi-company access, navigate to :menuselection:`Settings app --> Users section -->
+Manage Users`. Then select the desired user to open their user form.
 
-Under :guilabel:`Multi Companies` in the :guilabel:`Access Rights` tab, set the fields labeled
-:guilabel:`Allowed Companies` and :guilabel:`Default Company`.
+In the *Access Rights* tab, under the *Roles* section, configure the :guilabel:`Companies` and
+:guilabel:`Default Company` fields:
 
-The :guilabel:`Allowed Companies` field can contain multiple companies. These are the companies the
-user can access and edit, according to the set access rights. The :guilabel:`Default Company` is the
-company the user defaults to, upon logging in each time. This field can contain only **one**
-company.
+- :guilabel:`Companies`: Select one or more companies the user can access. The user's access and
+  editing permissions are determined by their assigned access rights.
+- :guilabel:`Default Company`: Select the company that is automatically selected when the user logs
+  in. Only one company can be set as the default.
 
 .. warning::
-   If multi-company access is not configured correctly, it could lead to inconsistent multi-company
-   behaviors. Because of this, only experienced Odoo users should make access rights changes to
-   users for databases with a multi-company configuration. For technical explanations, refer to the
-   developer documentation on :doc:`../../../developer/howtos/company`.
+   Incorrectly configuring multi-company access can result in inconsistent behavior across
+   companies. Only experienced Odoo users should modify user access rights in databases with a
+   multi-company configuration. For technical explanations, refer to the developer documentation on
+   :doc:`../../../developer/howtos/company`.
 
 .. image:: users/multi-companies.png
    :alt: View of a user's form emphasizing the multi companies field in Odoo.
@@ -233,7 +253,7 @@ company.
    users/language
    users/2fa
    users/access_rights
-   users/portal
+   users/user_portals
    users/facebook
    users/google
    users/azure

@@ -86,8 +86,10 @@ if meeting a specific requirement for the business.
        the Mexican electronic invoicing requirements
 
 .. seealso::
-   Payroll module information is available :doc:`here
-   <../../hr/payroll/payroll_localizations/mexico>`.
+   - :doc:`Mexican Payroll localization documentation
+     <../../hr/payroll/payroll_localizations/mexico>`
+   - :doc:`Documentation on e-invoicing's legality and compliance in Mexico
+     <../accounting/customer_invoices/electronic_invoicing/mexico>`
 
 .. _l10n/mx/video-tutorials:
 
@@ -464,7 +466,7 @@ instead.
    terms` that imply changing the due month (i.e., :guilabel:`30 Days`, or :guilabel:`15 Days`, as
    long as they fall on the next month).
 
-After clicking on :guilabel:`Confirm` in the customer invoice, click on the :guilabel:`Send` button
+After clicking :guilabel:`Confirm` in the customer invoice, click the :guilabel:`Send` button
 to process the invoice with the government. Make sure that the :guilabel:`CFDI` checkbox is marked.
 
 .. image:: mexico/mx-send-cfdi.png
@@ -534,6 +536,25 @@ bill **Must be in draft state** for the update to happen.
 
 .. seealso::
    :doc:`../accounting/vendor_bills`
+
+.. _l10n/mx/journals:
+
+Journals
+~~~~~~~~
+
+The module :guilabel:`EDI for Mexico (Advanced Features)` (`l10n_mx_edi_extended`) must be installed
+on the database to complete the :guilabel:`Address Issued` field on the sales journal. This ensures
+that all invoices from that sales journal, as well as :ref:`global invoices <l10n/mx/global-invoice>`,
+use the correct zipcode when generating the CFDI.
+
+To invoice within a company under different time zones with the same user, a system parameter must be
+created to ensure the correct time zone is applied when invoicing, as the user's time zone is used
+by default.
+
+To do so, enable :doc:`developer mode <../../general/developer_mode>` and go to
+:menuselection:`Settings --> Technical --> System Parameters`. Click :guilabel:`New` to create a new
+parameter with the key `l10n_mx_edi_tz_XX` where `XX` is the ID of the journal, and set the desired
+time zone as the value, for example, “America/Tijuana”.
 
 .. _l10n/mx/payments:
 
@@ -667,7 +688,7 @@ Cancellation reason 01
    with errors (with related document)` from the :guilabel:`Reason` field and click
    :guilabel:`Create Replacement Invoice` to create a new draft invoice. This new draft invoice
    replaces the previous invoice, along with the related |CFDI|.
-#. :guilabel:`Confirm` the draft and :guilabel:`Send & Print` the invoice.
+#. :guilabel:`Confirm` the draft and :guilabel:`Send` the invoice.
 #. Return to the initial invoice (i.e., the invoice from which you first requested the
    cancellation). Notice the :guilabel:`Substituted By` field appears with a reference to the new
    replacement invoice.
@@ -1019,11 +1040,26 @@ single invoice that can contain all operations, known as a *global invoice*.
    `Guía de llenado del CFDI global
    <http://omawww.sat.gob.mx/tramitesyservicios/Paginas/documentos/GuiallenadoCFDIglobal311221.pdf>`_
 
+Setup
+^^^^^
+
+The :guilabel:`Global Invoice Serie` is specific to each branch or company and is used to define the
+sequence of global invoices. To configure it, go to :menuselection:`Accounting --> Configuration -->
+Settings`, and navigate to the :guilabel:`MX Electronic invoicing` section. The :guilabel:`Global
+Invoice Serie` field can be found within the :guilabel:`Service Tax Administration (SAT)` section.
+
+.. image:: mexico/mx-accounting-settings.png
+   :alt: Accounting setting with an MX company.
+
+.. tip::
+   The default sequence for every company/branch is `GINV/`
+
 Sales flow
 ^^^^^^^^^^
 
-First, it is necessary to create a special :guilabel:`Journal` created in :menuselection:`Accounting
---> Configuration --> Journals` with the purpose of keeping a separate sequence.
+First, create a dedicated journal in :menuselection:`Accounting --> Configuration --> Journals` to
+maintain a separate sequence that is used for global invoices, which function as orders when they
+are created.
 
 Then, make sure that all the sales orders that need to be signed have the following configurations:
 
@@ -1349,7 +1385,7 @@ Point of sale
 =============
 
 The :doc:`Point of sale <../../sales/point_of_sale>` adaptation of the Mexican Localization enables
-the creation of invoices that comply with the |SAT| requirements directly in the **POS session**,
+the creation of invoices that comply with the |SAT| requirements directly from the **POS register**,
 with the added benefit of creating receipt tickets that allow *self-invoicing* in a special portal
 and creating global invoices.
 
@@ -1358,10 +1394,10 @@ and creating global invoices.
 Point of sale flow
 ------------------
 
-On top of the standard :doc:`Point of Sale configuration <../../sales/point_of_sale/configuration>`,
-the Mexican localization requires each payment method to be configured with a correct
-:guilabel:`Payment Way` as well as a :guilabel:`Re-invoicing account` to handle the accounting for
-invoices with the invoicing portal.
+On top of the standard :ref:`Point of Sale configuration <pos/use/settings>`, the Mexican
+localization requires each payment method to be configured with a correct :guilabel:`Payment Way`
+as well as a :guilabel:`Re-invoicing account` to handle the accounting for invoices with the
+invoicing portal.
 
 .. tip::
    By default, Odoo creates pre-configured payment methods for cash, credit card, and debit card and
@@ -1386,7 +1422,7 @@ receipt.
    :alt: Invoice Configuration for Point of Sale.
 
 To sign a credit note automatically, tick the :icon:`fa-file-text-o` :guilabel:`Invoice` checkbox
-when processing a :ref:`refund <pos/refund>`.
+when processing a :ref:`refund <pos/use/refund>`.
 
 .. note::
    Credit notes for returned products will contain the relation type :guilabel:`03 - Devolución de
@@ -1423,14 +1459,14 @@ to handle reversals of the sales entries when invoices are requested as well as 
 account for the new invoices.
 
 .. seealso::
-   :doc:`../../sales/point_of_sale/receipts_invoices`
+   :doc:`../../sales/point_of_sale/use/pos_invoices`
 
 .. _l10n/mx/pos/global-invoice:
 
 Global invoice
 --------------
 
-As with regular sales orders, global invoices can also be created from a POS session.
+As with regular sales orders, global invoices can also be created from the POS register.
 
 For this, make sure not to select a customer or the invoice option in the payment menu and go to
 :menuselection:`Point of Sale --> Orders --> Orders`. There, select all the orders to invoice, click
@@ -1442,7 +1478,7 @@ This attaches an XML file to each of the selected orders. The XML files can be d
 to the :guilabel:`CFDI` tab. If needed, it is possible to cancel the invoice from the same tab.
 
 If eventually any of the orders that are part of the global invoice need to be addressed to a
-customer, it is still possible to send an invoice by entering a new POS session, clicking the
+customer, it is still possible to send an invoice by opening the POS register, clicking the
 :icon:`fa-bars` :guilabel:`(drop-down menu)`, then click :guilabel:`Orders`. Change the
 :guilabel:`All active orders` filter to :guilabel:`Paid`, select the order, and click the
 :icon:`fa-file-text-o` :guilabel:`Invoice` button.
@@ -1553,7 +1589,7 @@ Configuration
 ~~~~~~~~~~~~~
 
 In order to track the correct customs number for a specific invoice, Odoo uses :doc:`landed costs
-<../../inventory_and_mrp/inventory/product_management/inventory_valuation/landed_costs>`. Go to
+<../../inventory_and_mrp/inventory/inventory_valuation/landed_costs>`. Go to
 :menuselection:`Inventory --> Configuration --> Settings`, and in the :guilabel:`Valuation` section,
 make sure that :guilabel:`Landed Costs` is activated.
 
@@ -1569,8 +1605,7 @@ and complete these three requirements:
   Number` but **not** :guilabel:`By Quantity`.
 - :guilabel:`Invoicing Policy` **must** be set to :guilabel:`Delivered quantities`.
 - :doc:`Valuation by lots/serial numbers
-  <../../inventory_and_mrp/inventory/product_management/inventory_valuation/valuation_by_lots>`
-  **must** be enabled.
+  <../../inventory_and_mrp/inventory/inventory_valuation/valuation_by_lots>` **must** be enabled.
 
 This will make the field :guilabel:`Customs invoicing` available on the :guilabel:`Accounting` tab.
 Enable the field to use customs numbers with this product.
@@ -1583,8 +1618,8 @@ configuration:
 
 .. note::
    The feature works regardless of whether the :doc:`inventory valuation
-   <../../inventory_and_mrp/inventory/product_management/inventory_valuation/using_inventory_valuation>`
-   is set to either :guilabel:`Periodic (at closing)` or :guilabel:`Perpetual (at invoicing)`.
+   <../../inventory_and_mrp/inventory/inventory_valuation/cheat_sheet>` is set to either
+   :guilabel:`Periodic (at closing)` or :guilabel:`Perpetual (at invoicing)`.
 
 .. image:: mexico/mx-landing-configuration.png
    :alt: Storable products general configuration.
@@ -1599,8 +1634,8 @@ After configuring the product, follow the standard :doc:`purchase flow
 <../../inventory_and_mrp/purchase>`.
 
 Create a purchase order from :menuselection:`Purchase --> Orders --> Purchase Order`. Then, confirm
-the order to display a :guilabel:`Receipt` smart button. Click on the :guilabel:`Receipt` smart
-button, add the lots or serial numbers and :guilabel:`Validate`.
+the order to display a :guilabel:`Receipt` smart button. Click the :guilabel:`Receipt` smart
+button and :guilabel:`Validate` the receipt.
 
 Go to :menuselection:`Inventory --> Operations --> Landed Costs`, and create a new record. In the
 :guilabel:`Transfer`, add the receipt that was just validated, and add the :guilabel:`Customs
@@ -1610,7 +1645,7 @@ number`.
    While it is possible to add costs related to the customs number at this stage of the process, it
    is highly recommended to create a landed cost from a vendor bill from your customs agent. Learn
    more about :doc:`Landed Costs here
-   <../../inventory_and_mrp/inventory/product_management/inventory_valuation/landed_costs>`.
+   <../../inventory_and_mrp/inventory/inventory_valuation/landed_costs>`.
 
 .. warning::
    The :guilabel:`Customs number` field is not editable once it is set, and cannot be repeated,
@@ -1626,7 +1661,7 @@ Cost` field can be edited at any time to fix any mistakes that could have occurr
 the landed cost. Editing the :guilabel:`L10N Mx Edi Landed Cost` field automatically updates the
 :guilabel:`Customs number` and the name of the lot or serial number.
 
-Next, create a sales order and confirm it. Click on the :guilabel:`Delivery` smart button that
+Next, create a sales order and confirm it. Click the :guilabel:`Delivery` smart button that
 appears, and carefully review the assigned lots/serial numbers to make sure they are the desired
 values, after that :guilabel:`Validate` the delivery order.
 

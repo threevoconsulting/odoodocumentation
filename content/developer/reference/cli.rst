@@ -46,7 +46,7 @@ Version
    it can be used in combination with any command available, and it displays
    the options of the current command.
 
-   If no command is used, it will act as per the `help` command 
+   If no command is used, it will act as per the `help` command
    :ref:`below <reference/cmdline/help>`.
 
 .. option:: --version
@@ -165,6 +165,12 @@ This command is the default one: you can omit it, and it will be chosen anyway.
     don't install demo data nor in new databases nor when installing new
     modules in a database that uses demo data, this is the default.
 
+.. option:: --skip-auto-install
+
+   skips auto-installing modules when a new module installation is requested.
+   This option is useful for development. It serves to check if the installed
+   modules do not indirectly depend on auto-installed modules.
+
 .. option:: --pidfile=<pidfile>
 
     path to a file where the server pid will be stored
@@ -261,7 +267,7 @@ Database
 
 .. option:: --db-filter <filter>
 
-    hides databases that do not match ``<filter>``. The filter is a
+    hides databases that do not match ``<filter>`` for the Web UI. The filter is a
     `regular expression`_, with the additions that:
 
     - ``%h`` is replaced by the whole hostname the request is made on.
@@ -310,6 +316,8 @@ Database
     and update base module on one database: 11firstdatabase.
     If database 11seconddatabase doesn't exist, the database is created and base modules
     is installed
+
+    .. warning:: This option does not affect cron workers, if no --database is given, cron workers will run on every available database
 
 .. option:: --db-template <template>
 
@@ -478,7 +486,7 @@ HTTP
     request root URL, which in turn is used to update the ``web.base.url``
     system parameter upon a successful admin authentication. This system
     parameter is used to generate all links for the current database; see
-    :ref:`domain-name/web-base-url`.
+    :ref:`domain-name/existing/db-map/web-base-url`.
 
 
     .. warning:: proxy mode *must not* be enabled outside of a reverse proxy
@@ -755,7 +763,7 @@ involves starting the server, the configuration file options do apply.
 .. program:: odoo-bin db
 
 This command lets you manage databases through a command-line interface. The operations are
-specified using subcommands. 
+specified using subcommands.
 
 For all subcommands, these options to configure your environment are available:
 
@@ -1003,7 +1011,7 @@ existing terms. All the files must refer to the specified language.
 
 .. option:: files
 
-   | List of files to be imported. 
+   | List of files to be imported.
    | Allowed extensions: `.po`, `.csv`.
 
 .. option:: -l,--language
@@ -1141,10 +1149,12 @@ This command upgrades all selected modules straight away.
 .. option:: modules
 
    List of modules you want to upgrade.
+   Use ``base`` or ``all`` for all installed modules.
 
 .. option:: --outdated
 
    Only update modules that have a newer version on disk.
+   If ``all`` is used as ``modules`` argument, this applies to all installed modules.
 
 
 .. _reference/cmdline/module`u/forcedemo:

@@ -7,8 +7,48 @@ Kenya
 Configuration
 =============
 
-Install the 🇰🇪 **Kenyan** :ref:`fiscal localization package <fiscal_localizations/packages>` to get
-all the features of the Kenyan localization.
+The following modules are installed automatically with the Kenyan localization:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 50
+
+   * - Name
+     - Technical name
+     - Description
+   * - :guilabel:`Kenya - Accounting`
+     - `l10n_ke`
+     - The base module to manage the chart of accounts and localization for Kenya
+   * - :guilabel:`Kenya - Accounting Report`
+     - `l10n_ke_reports`
+     - Accounting reports specific to the Kenyan localization
+   * - :guilabel:`Kenya eTIMS EDI Integration`
+     - `l10n_ke_edi_oscu`
+     - Base electronic Tax Invoice Management System (eTIMS) integration
+   * - :guilabel:`Kenya ETIMS EDI Manufacturing Integration`
+     - `l10n_ke_edi_oscu_mrp`
+     - Manufacturing-specific electronic Tax Invoice Management System (eTIMS) integration
+
+The following modules are optional. It's recommended to :ref:`install <general/install>` them *only*
+if meeting a specific requirement for the business.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 25 50
+
+   * - Name
+     - Technical name
+     - Description
+   * - :guilabel:`Kenya - Point of Sale`
+     - `l10n_ke_edi_oscu_pos`
+     - Point of Sale-specific electronic Tax Invoice Management System (eTIMS) integration
+   * - :guilabel:`Kenya Tremol Device EDI Integration`
+     - `l10n_ke_edi_tremol`
+     - G03 Tremol control unit integration to report taxes to the Kenya Revenue Authority (KRA)
+       through the Tax Invoice Management System (TIMS)
+
+.. seealso::
+   :doc:`Kenyan Payroll localization documentation <../../hr/payroll/payroll_localizations/kenya>`
 
 eTIMS
 =====
@@ -190,15 +230,21 @@ per branch.
 .. example::
    If you have a parent company with two branches, the invoice sequence would be the following:
 
-   - Creating an invoice on **branch 1**: INV/2024/00001;
-   - Creating an invoice on **branch 2**: INV/2024/00002;
+   - Creating an invoice on **branch 1**: INV/2024/00001.
+   - Creating an invoice on **branch 2**: INV/2024/00002.
    - Creating an invoice on the **parent company**: INV/2024/00003.
 
    This is how Odoo manages sequences to be compliant with the KRA regulations:
 
-   - Creating an invoice on **branch 1**: INV/2024/00001;
-   - Creating an invoice on **branch 2**: INV/2024/00001;
+   - Creating an invoice on **branch 1**: INV/2024/00001.
+   - Creating an invoice on **branch 2**: INV/2024/00001.
    - Creating an invoice on the **parent company**: INV/2024/00001.
+
+Integration tokens
+------------------
+
+To obtain integration tokens for eTIMS, send a request to the following email address:
+etims@mail.odoo.com.
 
 Insurance
 =========
@@ -218,15 +264,19 @@ The KRA requires **products to be registered** first before conducting business 
 stock movements, :abbr:`BOM (Bill of Materials)`, customer invoices, etc.). For a product to be
 registered, the following fields must be defined on the product form:
 
-- In the :guilabel:`General Information` tab: :guilabel:`Cost`.
+- In the :guilabel:`General Information` tab:
+
+  - :guilabel:`Cost`
+  - :guilabel:`Sales taxes`
+
 - In the :guilabel:`Accounting` tab:
 
-  - :guilabel:`Packaging Unit`;
-  - :guilabel:`Packaging Quantity`;
-  - :guilabel:`Origin Country`;
-  - :guilabel:`eTIMS Product Type`;
-  - :guilabel:`Insurance Applicable`;
-  - :ref:`UNSPSC Category <etims/unspsc>`.
+  - :guilabel:`Packaging Unit`
+  - :guilabel:`Packaging Quantity`
+  - :guilabel:`Origin Country`
+  - :guilabel:`eTIMS Product Type`
+  - :guilabel:`Insurance Applicable`
+  - :ref:`UNSPSC Category <etims/unspsc>`
 
 If the elements above are defined, the product is automatically registered while sending the
 operation to the KRA. If not, you will be alerted by a yellow banner at the top of the screen
@@ -286,7 +336,7 @@ are the following:
    :guilabel:`Create Purchase Order` and create a purchase order based on the unmatched line(s).
    :guilabel:`Validate` the resulting stock move and :guilabel:`Confirm` the bill.
 
-#. Set a method in the :guilabel:`eTIMS Payment Method` field..
+#. Set a method in the :guilabel:`eTIMS Payment Method` field.
 #. Once all steps are completed, click :guilabel:`Send to eTIMS` to send the vendor bill. When the
    vendor bill has been confirmed on eTIMS, the **KRA invoice number** can be found in the
    :guilabel:`eTIMS Details` tab.
@@ -305,16 +355,16 @@ This is the **advised sales flow** in Odoo when selling:
 #. Create a **sales order**.
 #. :guilabel:`Validate` the delivery.
 #. :guilabel:`Confirm` the invoice.
-#. Click :guilabel:`Send and print`, and then enable :guilabel:`Send to eTIMS`.
-#. Click :guilabel:`Send & print` to send the invoice.
+#. Click :guilabel:`Send`, and then enable :guilabel:`Send to eTIMS`.
+#. Click :guilabel:`Send` to send the invoice.
 
 Once the invoice has been sent and signed by the KRA, the following information can be found on
 it:
 
-- **KRA invoice number**;
+- **KRA invoice number**
 - Mandatory KRA invoice fields, such as **SCU information**, **date**, **SCU ID**, **receipt
-  number**, **item count**, **internal date**, and **receipt signature**;
-- The **KRA tax table**;
+  number**, **item count**, **internal date**, and **receipt signature**.
+- The **KRA tax table**
 - A unique **KRA QR code** for the signed invoice.
 
 Imports

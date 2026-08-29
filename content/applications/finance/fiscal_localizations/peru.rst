@@ -68,8 +68,8 @@ Peruvian localization.
        electronic invoices.
    * - :guilabel:`Peruvian - Point of Sale with PE Doc`
      - `l10n_pe_pos`
-     - Enables contact fiscal information to be editable from a PoS Session to generate electronic
-       invoices and refunds.
+     - Enables contact fiscal information to be editable from the POS register to generate
+       electronic invoices and refunds.
 
 .. note::
    - Odoo automatically installs the appropriate package for the company according to the country
@@ -132,6 +132,22 @@ localization module, the accounts are mapped automatically in:
 The chart of accounts for Peru is based on the most updated version of the :abbr:`PCGE (Plan
 Contable General Empresarial)`, which is grouped in several categories and is compatible with NIIF
 accounting.
+
+.. _peru/configuration-ple:
+
+PLE reports
+~~~~~~~~~~~
+
+ .. important::
+    For the generation of :ref:`PLE reports <peru/reports-ple>`, the type of chart of accounts is
+    not set by default, and must be set manually.
+
+To set the appropriate type of chart of accounts for the generation of PLE reports, open the
+**Accounting** app, go to :menuselection:`Configuration --> Settings`, and scroll down to the
+:guilabel:`Peruvian Electronic Invoicing` section.
+
+In the :guilabel:`PLE Type of CoA` field, select the required chart of accounts from the dropdown,
+and click :guilabel:`Save`.
 
 .. _peru-accounting-settings:
 
@@ -564,11 +580,34 @@ When creating exportation invoices, take into account the next considerations:
 Advance Payments
 ****************
 
-#. Create the advance payment Invoice and apply its related payment.
-#. Create the final invoice without considering the advance payment.
-#. Create a credit note for the Final invoice with the advance payment amount.
-#. Reconcile the Credit note with the final invoice.
-#. The remaining balance on the final invoice should be paid with a regular payment transaction.
+.. note::
+   Because the SUNAT does not allow negative in filings, a workaround is required when reporting
+   down payments.
+
+#. Open the sales order requiring a down payment.
+#. Click :guilabel:`Create Invoice` and select :guilabel:`Down payment (percentage)` or
+   :guilabel:`Down payment (fixed amount)`. Enter the amount, then click :guilabel:`Create Draft`.
+#. Check that all information is correct. If yes, click :guilabel:`Confirm`. If not, make the
+   necessary changes before confirming.
+#. Navigate back to the sales order and click :menuselection:`Create Invoice --> Regular Invoice -->
+   Create Draft` to proceed with invoice creation.
+#. From the invoice, remove the section separation *and* the down payment invoice line by clicking
+   the :icon:`fa-trash-o` :guilabel:`(trash bin)` icon, and :guilabel:`Confirm`.
+
+   .. image:: peru/invoice-line-section-trash-bin.png
+      :alt: Removing invoice lines and section.
+
+#. Once confirmed, click :guilabel:`Credit Note`, then :guilabel:`Reverse`, and finally remove all
+   invoice lines by clicking the :icon:`fa-trash-o` :guilabel:`(trash bin)` icon. The invoice should
+   be clear of any product.
+#. Next, click :guilabel:`Add a line`. Click the :icon:`fa-bars` :guilabel:`(bars)` icon, enter a
+   description (e.g., `Down Payment`), and input the :guilabel:`Price`. Click :guilabel:`Confirm`.
+
+   .. image:: peru/down-payment-description.png
+      :alt: Adding down payment description.
+
+#. After issuing the credit note and if not done automatically, reconcile it with the final invoice.
+#. The final invoice's remaining balance **must** be paid with a regular payment transaction.
 
 Detraction Invoices
 *******************
@@ -923,9 +962,9 @@ Configuration
 After configuring the Peruvian :ref:`electronic invoicing <peru-accounting-settings>` flow, complete
 the following configurations for the **eCommerce** flow:
 
-- :ref:`Client account registration <ecommerce/checkout/policy>`;
-- :ref:`Automatic invoice <handling/legal>`;
-- :doc:`../../websites/ecommerce/products`: Set the :guilabel:`Invoicing Policy` to
+- :ref:`Client account registration <ecommerce/customer_accounts/checkout-access>`;
+- :ref:`Automatic invoice <ecommerce/handling/invoices>`;
+- :doc:`../../websites/ecommerce/configuration/products`: Set the :guilabel:`Invoicing Policy` to
   :guilabel:`Ordered quantities` and define the desired :guilabel:`Customer taxes`.
 - :doc:`../payment_providers`;
 - :doc:`../../websites/ecommerce/shipping`: For each shipping method, set
@@ -966,6 +1005,10 @@ Reports
 Permanent inventory reports: |PLE| 12.1 and |PLE| 13.1
 ------------------------------------------------------
 
+.. note::
+   Make sure to :ref:`set <peru/configuration-ple>` the appropriate type of chart of accounts for
+   your PLE reports.
+
 Odoo can produce two permanent inventory reports as `.txt` files for Peruvian accounting: |PLE| 12.1
 and |PLE| 13.1. All inventory transactions made need to be reported.
 
@@ -1003,12 +1046,11 @@ Several configurations related to the product or product category are necessary 
 
 - **Automatic inventory valuation**: For storable goods (:dfn:`products with tracked inventory`),
   use :doc:`automatic inventory valuation
-  <../../inventory_and_mrp/inventory/product_management/inventory_valuation/inventory_valuation_config>`.
-  Once automatic inventory valuation is enabled, this valuation method can be enabled for
-  a product's :ref:`product category <inventory/warehouses_storage/valuation-on-product-category>`.
+  <../../inventory_and_mrp/inventory/inventory_valuation/cheat_sheet>`. Once automatic inventory
+  valuation is enabled, this valuation method can be enabled for a product's product category.
 
 - **Costing method:** Storable goods must use a :doc:`costing method
-  <../../inventory_and_mrp/inventory/product_management/inventory_valuation/inventory_valuation_config>`
+  <../../inventory_and_mrp/inventory/inventory_valuation/cheat_sheet>`
   **other** than :guilabel:`Standard Price`, as the journal entries generated from stock moves are
   used to populate the |PLE| reports.
 
@@ -1041,7 +1083,7 @@ Generate a .txt file for permanent inventory Kardex reports
 |PLE| 12.1 and 13.1 come as two separate books. The books need to be downloaded in `.txt` file
 format from Odoo, and then they should be submitted to the |SUNAT| |PLE| software.
 
-On the :ref:`Inventory Valuation Report <inventory/management/reporting/valuation-report>`, click
+On the :ref:`Inventory Valuation Report <inventory/product_management/valuation-report>`, click
 the :guilabel:`PLE Reports` button. Then, select the :guilabel:`Period` and choose a report to
 export: either the :guilabel:`PLE 12.1` or :guilabel:`PLE 13.1`. Odoo generates a `.txt` file
 for the chosen report.

@@ -244,7 +244,7 @@ After the account is created from Odoo, go to the Avalara Portal to set up the p
 #. Click :guilabel:`Meu primeiro acesso`.
 #. Add the email address used in Odoo to create the Avalara/AvaTax account, and click
    :guilabel:`Solicitar Senha`.
-#. An email will then be received with a token and a link to create a password. Click on this link
+#. An email will then be received with a token and a link to create a password. Click this link
    and copy-paste the token to allocate the desired password.
 
 .. tip::
@@ -512,7 +512,7 @@ government when the invoice is submitted:
 - :guilabel:`Freight Model` determines how the goods are planned to be transported - domestic.
 - :guilabel:`Transporter Brazil` determines who is doing the transportation.
 
-Then, click :guilabel:`Send`. In the :guilabel:`Print & Send` window, click :guilabel:`Process
+Then, click :guilabel:`Send`. In the pop-up window, click :guilabel:`Process
 e-invoice` and any other options, such as :guilabel:`Download` or :guilabel:`Email`. Finally, click
 :guilabel:`Send` to process the invoice with the government.
 
@@ -693,7 +693,7 @@ Security Code) fields:
 Product configuration
 ---------------------
 
-Access the relevant :doc:`product form in POS <../../sales/point_of_sale/configuration>`, then
+Access the relevant :doc:`product form in POS <../../sales/point_of_sale/products>`, then
 configure the :ref:`product <localizations/brazil/products>`'s :guilabel:`Brazil Accounting`
 fields.
 
@@ -703,9 +703,8 @@ Point of sale
 -------------
 
 Go to :menuselection:`Point of Sale --> Configuration --> Settings` and make sure that the relevant
-Point of Sale is :doc:`selected at the top of the screen <../../sales/point_of_sale/configuration>`.
-Then, scroll to the :guilabel:`Accounting` section and configure the :guilabel:`Brazilian EDI`
-fields:
+Point of Sale is :ref:`selected at the top of the screen <pos/use/settings>`. Then, scroll to the
+:guilabel:`Accounting` section and configure the :guilabel:`Brazilian EDI` fields:
 
 - :guilabel:`Series`
 - :guilabel:`Next number`: the next NFC-e number in the sequence to be issued, for instance, if the
@@ -723,12 +722,12 @@ Generating an NFC-e
 
 To generate an NFC-e, follow these steps:
 
-#. :ref:`Open the relevant point of sale shop and make a sale <pos/session-start>`.
+#. :ref:`Open the relevant point of sale shop and make a sale <pos/use/open-register>`.
 #. Validate the payment to calculate taxes and issue an NFC-e. The valid NFC-e appears on the right
    side of the screen.
 
 .. image:: brazil/l10n-br-nfce-succesfully-issued.png
-   :alt: NFC-e Success in a POS session.
+   :alt: NFC-e Success in the POS register.
 
 .. note::
    It is also possible to issue an NFC-e that identifies the customer by their CPF/CNPJ. To do
@@ -770,7 +769,7 @@ If the NFC-e returns an error, follow these steps:
 #. Click :guilabel:`Send NFC-e`.
 
 .. note::
-   If the error has been corrected and the PoS session is closed, Odoo logs the tax adjustment in
+   If the error has been corrected and the POS register is closed, Odoo logs the tax adjustment in
    the chatter of the related journal entry. The journal entry for the order indicates that the
    taxes were incorrectly calculated. In this case, reprocessing the NFC-e is required.
 
@@ -782,8 +781,8 @@ If the NFC-e returns an error, follow these steps:
 NFC-e refunds & cancellations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:ref:`Refunds can be processed directly in Odoo <pos/refund>`, but *cancellations* must be performed
-through the official government portal.
+:ref:`Refunds can be processed directly in Odoo <pos/use/refund>`, but *cancellations* must be
+performed through the official government portal.
 
 When the process is finalized, the approved return NF-e is created, meaning the **previous NFC-e is
 canceled**.

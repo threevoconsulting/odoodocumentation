@@ -13,10 +13,9 @@ the order, ensuring it arrives just in time for delivery.
 
 The forecasted date is the **earliest possible date** to receive a product if the replenishment
 process starts immediately. It is calculated by summing the lead times linked to the replenishment
-process, such as :ref:`vendor lead times <inventory/warehouses_storage/purchase-lt>` and
-:ref:`purchasing delays <inventory/warehouses_storage/purchase-security-lt>` for purchases, or
-:ref:`manufacturing lead times <inventory/warehouses_storage/manuf-lt>` for production. This works
-with both automatic and manual reordering rules.
+process, such as :ref:`vendor lead times <inventory/warehouses_storage/purchase-vendor-lt>` for
+purchases or :ref:`manufacturing lead times <inventory/warehouses_storage/manufacturing-lt>` for
+production. This works with both automatic and manual reordering rules.
 
 .. tip::
   If utilizing just-in-time logic feels risky, consider adding buffer time or :doc:`adjusting lead
@@ -43,8 +42,8 @@ reducing the risk of overstocking.
 
 .. note::
    Just-in-time logic determines the exact timing of replenishment. If you want to extend this logic
-   to also consider near-future demand beyond the forecast date, see :ref:`Visibility Days
-   <inventory/warehouses_storage/visibility-days>`
+   to also consider near-future demand beyond the forecast date, see :ref:`Horizon Days
+   <inventory/warehouses_storage/horizon-days>`
 
 If the forecasted quantity falls below the minimum on the forecasted date, replenishment is
 triggered immediately to prevent shortages. If the quantity falls below the minimum after the

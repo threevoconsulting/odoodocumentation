@@ -10,14 +10,16 @@ also useful tools for managing more complex bills of materials (BoMs).
    To use, manufacture, and sell kits, both the :guilabel:`Manufacturing` and :guilabel:`Inventory`
    apps need to be installed.
 
+.. _manufacturing/advanced_configuration/kits:
+
 Create the kit as a product
 ===========================
 
 To use a kit as a sellable product, or as a component organization tool, the kit should first be
 created as a product.
 
-To create a kit product, go to :menuselection:`Inventory app --> Products --> Products`, and then
-click :guilabel:`New`.
+To create a kit product, go to :menuselection:`Manufacturing app --> Products --> Products`, and
+then click :guilabel:`New`.
 
 Then, assign a name to the new kit product. Next, set the kit's product type depending on inventory
 tracking needs and accounting requirements. To do this, under the :guilabel:`General Information`
@@ -56,7 +58,7 @@ and inventory tracking is essential.
   in journals, then tracking the kit's inventory is recommended.
 * **Component Purchase Constraints**: Only the kit's minimum required components can be added to an
   **eCommerce** cart unless the option to :doc:`continue
-  selling<../../../websites/ecommerce/products>` is disabled.
+  selling <../../../websites/ecommerce/configuration/products>` is disabled.
 * **No Kit Serial Numbers**: Serial number tracking does not track the kit, only its shipped
   components.
 * **Reordering Rule Recommendation**: Reordering rules should be set at the component-level.
@@ -71,6 +73,8 @@ Regardless of which setup is used, there are some similarities between the two o
 * **No Kit-Level Stock Adjustments**: Stock adjustments cannot be handled at the kit-level.
 * **Kit Value Does Not Change**: The stock's value is the same whether the kit's is tracked.
 * **Kit Internal Transfers**: An internal transfer for the kit breaks it into components.
+
+.. _manufacturing/advanced_configuration/kit-bom:
 
 Set up the kit BoM
 ==================

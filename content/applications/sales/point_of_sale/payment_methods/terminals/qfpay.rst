@@ -18,14 +18,14 @@ QFPay configuration
 To configure a QFPay payment terminal, follow these steps:
 
 #. Create a QFPay account on the `QFPay website <https://qfpay.global/products/qfpay-pos-api/>`_.
-#. Request activation of `Asynchronous Notifications
-   <https://sdk.qfapi.com/docs/common-api/asynchronous-notification/>`_ from the application email.
-#. Provide the Odoo server address on the QFPay portal, followed by `/qfpay/notify`, and copy the
+#. Request the activation of `Asynchronous Notifications
+   <https://sdk.qfapi.com/docs/common-api/asynchronous-notification/>`_ from QFPay.
+#. Provide the Odoo server address to QFPay, followed by `/qfpay/notify`, and copy the
    notification key provided by QFPay.
 #. Set up the QFPay terminal by connecting the HaoJin App to the QFPay account as instructed by
    QFPay, then copy the terminal's IP address.
 #. Request a self-signed certificate from QFPay linked to the terminal's IP address, and import it
-   into the relevant POS in Odoo.
+   into the POS machine.
 #. Generate a :guilabel:`POS-KEY` from the HaoJin App: go to :menuselection:`Haojin App --> My -->
    Settings --> Pos Call Up Key --> Reset Key`. Then, copy the generated :guilabel:`POS-KEY`.
 
@@ -34,7 +34,7 @@ To configure a QFPay payment terminal, follow these steps:
      refunds by QFPay.
    - Write the server address as follows: `https://yourdomain.odoo.com/qfpay/notify`.
    - If the terminal's IP address changes, update it in the :ref:`Odoo POS settings
-     <configuration/settings>` and request a new self-signed certificate from QFPay.
+     <pos/use/settings>` and request a new self-signed certificate from QFPay.
    - If a QFPay account already exists, contact `technical.support@qfpay.com` with the merchant
      information and server address.
 

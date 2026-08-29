@@ -36,7 +36,6 @@ To set up reordering rules for the first time, refer to:
 To understand and optimize replenishment using advanced features, see:
 
 - :doc:`Just in time logic <just_in_time>`
-- :ref:`Visibility days <inventory/warehouses_storage/visibility-days>`
 - :ref:`Horizon days <inventory/warehouses_storage/horizon-days>`
 
 .. _inventory/warehouses_storage/configure-rr:
@@ -78,13 +77,10 @@ the :guilabel:`Purchase` checkbox is enabled under the product name. In the :gui
 tab, add at least one vendor to the :doc:`vendor pricelist <../../../purchase/products/pricelist>`.
 Odoo uses the vendor at the top of the list to generate |RFQs| when reordering rules are triggered.
 
-In the :guilabel:`Inventory` tab's :guilabel:`Routes` field, tick the :guilabel:`Buy` checkbox.
-
 .. seealso::
    :doc:`Vendor pricelist <../../../purchase/products/pricelist>`
 
-If the product is manufactured, :ref:`install <general/install>` the **Manufacturing** app, and in
-the :guilabel:`Inventory` tab's :guilabel:`Routes` field, tick the :guilabel:`Manufacture` checkbox.
+If the product is manufactured, :ref:`install <general/install>` the **Manufacturing** app.
 
 Next, ensure at least one :doc:`bill of materials
 <../../../manufacturing/basic_setup/bill_configuration>` (BoM) is displayed in the :guilabel:`Bill
@@ -99,8 +95,8 @@ button, then click :guilabel:`New` to configure a new |BoM|.
 
 .. _inventory/warehouses_storage/rr-fields:
 
-Create new reordering rules
----------------------------
+Create a reordering rule
+------------------------
 
 To create a new reordering rule, navigate to :menuselection:`Inventory app --> Operations -->
 Replenishment`, then click :guilabel:`New`, and fill out the following fields for the new reordering
@@ -112,9 +108,6 @@ rule line item:
   triggered. When forecasted stock falls below this number, a replenishment order for the product is
   created.
 - :guilabel:`Max`: The maximum quantity at which the stock is replenished.
-- :guilabel:`Multiple Quantity`: If the product should be ordered in specific quantities, enter the
-  number that should be ordered. For example, if the :guilabel:`Multiple Quantity` is set to `5`,
-  and only 3 are needed, 5 products are replenished.
 
 .. figure:: reordering_rules/reordering-rule-form.png
    :alt: The form for creating a new reordering rule.
@@ -136,8 +129,8 @@ For advanced usage, learn about the following reordering rule fields:
 - :ref:`Preferred route <inventory/warehouses_storage/route>`
 - :ref:`Vendor <inventory/warehouses_storage/set-vendor>`
 - :ref:`Bill of materials <inventory/warehouses_storage/set-bom-field>`
+- :ref:`Multiple <inventory/warehouses_storage/multiple>`
 - :ref:`Procurement group <inventory/warehouses_storage/procurement-grp>`
-- :ref:`Visibility days <inventory/warehouses_storage/visibility-days>`
 
 .. note::
    The fields above are not available by default, and must be enabled by selecting the |adjust| in
@@ -201,6 +194,44 @@ is used to replenish the product in one-unit increments, back up to the :guilabe
    Once the product is received from the vendor, the forecasted quantity returns to `0.00`. There is
    now one unit on-hand, but it is not reserved for the |SO| which triggered its purchase. It can be
    used to fulfill that |SO|, or reserved for a different order.
+
+.. _inventory/warehouses_storage/multiple:
+
+Multiple
+--------
+
+The :guilabel:`Multiple` field on the replenishment report (:menuselection:`Inventory app -->
+Operations --> Replenishment`) defines the unit used when replenishing a product. Odoo rounds the
+ordered quantity *up* to the nearest multiple that meets or slightly exceeds the :guilabel:`Max`
+quantity set on the reordering rule. If no multiples apply, select :guilabel:`Units`.
+
+.. example::
+   A vendor sells soda only in cases of six cans, but your company tracks quantities per can.
+   Setting the :guilabel:`Multiple` to `6` ensures soda is ordered in multiples of six (6, 12,
+   18...).
+
+   For a reordering rule with the :guilabel:`Min` = `10` and :guilabel:`Max` = `40`:
+
+   - If the forecasted quantity is `10`, the amount :guilabel:`To Order` is `30`, a multiple of six
+     that will bring the :guilabel:`On Hand` quantity to exactly the maximum.
+   - If the forecasted quantity is `8`, the quantity needed to reach the max is `32`. But 32 is not
+     a multiple of six, so Odoo rounds the :guilabel:`To Order` quantity up to `36`. This will cause
+     the :guilabel:`On Hand` quantity to slightly exceed the maximum.
+
+   .. image:: reordering_rules/multiple.png
+      :alt: Reordering rule with the Multiple set to 6.
+
+.. note::
+   If the maximum is exceeded, expect to see a :icon:`fa-warning` warning indicating the possibility
+   of excessive stock.
+
+Configuration
+~~~~~~~~~~~~~
+
+Multiples are based on defined :doc:`packagings <../../product_management/configure/packaging>`.
+Only packaging types listed on the product's :doc:`vendor pricelist
+<../../../purchase/products/pricelist>` appear as options in the :guilabel:`Multiple` field when
+configuring reordering rules.
 
 .. _inventory/warehouses_storage/trigger:
 
@@ -389,88 +420,48 @@ advanced configurations of reordering rules. Consider the following:
 .. seealso::
    :doc:`Just-in-time logic <just_in_time>`
 
-.. _inventory/warehouses_storage/visibility-days:
-
-Visibility days
-===============
-
-*Visibility days* enable the ability to determine if additional quantities should be added to the
-planned replenishment. Odoo checks if forecasted stock on the forecasted date will drop below the
-minimum in the reordering rule. **Only if** it is time to reorder, visibility days check additional
-future demand by the specified number of days.
-
-.. note::
-   Visibility days extend the standard just-in-time replenishment logic by looking beyond the
-   immediate forecasted date. To fully understand how Odoo determines when replenishment is
-   triggered, refer to the :doc:`Just-in-time logic <just_in_time>`
-
-This feature helps consolidate orders by grouping immediate and near-future needs, reducing
-transport costs and enabling supplier discounts for larger orders.
-
-To set visibility days to incorporate orders for a specified number of days in the future, navigate
-to :menuselection:`Inventory app --> Operations --> Replenishment`, or by clicking the *Reordering
-Rules* smart button from the product form.
-
-Next, enable the :guilabel:`Visibility Days` field by clicking the |adjust| to the far right and
-choosing the feature from the drop-down menu. Then, enter the desired visibility days.
-
-.. important::
-   The forecasted date is never pushed forward or extended; Odoo only checks the extra visibility
-   days if the stock falls below the minimum threshold on the forecasted date.
-
-Example where visibility days is triggered
-------------------------------------------
-
-A product shipped from Asia has a combined vendor lead time of 30 days and a shipping cost of $100
-(including :doc:`landed costs <../../product_management/inventory_valuation/landed_costs>` and
-tariffs).
-
-- November 4: Current date. The forecasted date is December 4 (30 days later).
-- |SO| 1: Requires the product by Dec 4. Odoo places the order today, costing $100.
-- |SO| 2: Requires the product by Dec 19. Normally, Odoo would order on Nov 19, costing an
-  additional $100.
-- |SO| 3: Requires the product by Dec 25. Normally, Odoo would order on Nov 25, costing another
-  $100.
-
-Ordering separately for these sales orders totals $300 in shipping costs.
-
-.. image:: reordering_rules/forecasted-date.png
-   :alt: Show forecasted date visualization.
-
-Setting :guilabel:`Visibility Days` to `20.0` allows Odoo to "look ahead" 20 days from December 4
-(|SO| 1's forecasted date) to December 24.
-
-- It groups |SO| 2's order with |SO| 1, reducing shipping costs by consolidating orders.
-- |SO| 3, which is due on Dec 25, is one day late and is not grouped with the other two orders.
-
-Counterexample where visibility days is not triggered
------------------------------------------------------
-
-Considering the example above, if |SO| 1 does not exist, then:
-
-- **November 4**: Current date. The forecasted date is December 4 (30 days later).
-- **November 5**: The forecasted date shifts to December 5.
-- |SO| 2: Requires the product by December 19. Odoo will only trigger the order on November 19,
-  meaning the user will not see a replenishment notification until then.
-
-This shows that visibility days complement just-in-time logic by optimizing it to balance
-replenishment costs more effectively.
-
-.. image:: reordering_rules/counterexample.png
-   :alt: Example where the visibility days does not trigger.
-
 Horizon days
 ============
 
-*Horizon days* determine how many days ahead Odoo checks if the forecasted quantity will drop below
-reordering rule's minimum. The feature is meant to help users plan replenishment in advance, by
-increasing the :ref:`forecasted date <inventory/warehouses_storage/forecasted-date>`.
+*Horizon days* allow users to extend the time window between today's date and the forecasted date
+when calculating for the forecasted quantity. This features allows users to plan and restock
+inventory proactively, rather than following a just-in-time approach. The feature is meant to help
+users plan replenishment in advance by increasing the :ref:`forecasted date
+<inventory/warehouses_storage/forecasted-date>`.
 
 .. math::
    :class: overflow-scroll
 
    \text{Forecasted date} = \text{Current date} + \text{Vendor Lead Time} + \text{Horizon Days}
 
-
 Since horizon days are only meant to be used with manual reordering rules, find details about the
 feature in the :doc:`Replenishment report article <report>`.
+
+.. note::
+   Horizon days are configured on a company level.
+
+The default horizon days setting can be set or updated by navigating to the
+:menuselection:`Inventory app --> Advanced Scheduling`. Enter the desired number of days in the
+:guilabel:`Replenishment Horizon` field, and click :guilabel:`Save`.
+
+.. image:: reordering_rules/replenishment-horizon.png
+   :alt: The Replenishment Horizon setting in the Inventory app.
+
+Example of how horizon days affect replenishment planning
+---------------------------------------------------------
+
+On the Replenishment report, there are currently two products listed due for reordering: `Drawer,
+Black` and `Corner Desk`. This is based on their current level of on-hand stock, and their
+forecasted stock level. The default horizon days is set as `20`.
+
+.. image:: reordering_rules/twenty-days.png
+   :alt: Replenishment report with horizon days set at 20.
+
+However, by extending the horizon days to `30`, an additional product is added to the list.
+
+.. image:: reordering_rules/thirty-days.png
+   :alt: Replenishment report with horizon days set at 30.
+
+This is because the additional product, `[FURN_0789] Individual Workplace`, has a delivery scheduled
+in twenty-nine days, at which point their on-hand stock levels will fall below the minimum needed
+on-hand.

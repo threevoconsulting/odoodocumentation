@@ -15,8 +15,8 @@ To access the stock report, go to :menuselection:`Inventory app --> Reporting --
    :align: center
    :alt: Show the stock report, accessible by going to Inventory > Reporting > Stock.
 
-Navigate the stock report
-=========================
+Navigate the report
+===================
 
 On the stock report, the left sidebar includes several groupings to narrow down what is being shown.
 The default groupings are :guilabel:`Warehouses`,  which filters products by specific warehouses,
@@ -36,8 +36,7 @@ In the report itself, the columns represent:
 
   .. seealso::
      - :ref:`Compute average cost inventory valuation per unit <inventory/avg_cost/formula>`
-     - :doc:`Inventory valuation methods
-       <../../product_management/inventory_valuation/inventory_valuation_config>`
+     - :doc:`Inventory valuation methods <../../inventory_valuation/cheat_sheet>`
 
 - :guilabel:`On Hand`: current quantity of products. Click the :icon:`fa-pencil`
   :guilabel:`(pencil)` icon to :doc:`modify the on-hand quantity
@@ -117,8 +116,8 @@ Search options
         <../../product_management/configure/type>`.
       - :guilabel:`Product Category`: group items by product category. To configure these, go to
         :menuselection:`Inventory app --> Configuration --> Products: Product Categories`.
-      - :guilabel:`POS Product Category`: group items by :doc:`point of sale product categories
-        <../../../../sales/point_of_sale/configuration>`.
+      - :guilabel:`POS Product Category`: group items by :ref:`point of sale product categories
+        <pos/products/categories>`.
 
    .. tab:: Favorites
 

@@ -39,8 +39,8 @@ either:
 
 The :guilabel:`Bank Matching` view is composed of lines for each transaction of the journal with the
 newest displayed first. Each transaction has a date, a label, a partner (if set), :ref:`action
-buttons <accounting/reconciliation/action-buttons>`, and the transaction amount. Each line can be
-expanded to show additional information and buttons.
+buttons <accounting/reconciliation/action-buttons>`, and the transaction amount. Each line has
+additional actions available through the :icon:`oi-ellipsis-v` :guilabel:`(ellipsis)` button.
 
 .. image:: reconciliation/user-interface.png
    :alt: The user interface of the bank matching view of a bank journal.
@@ -60,14 +60,17 @@ journal's main account and its suspense account until it is fully reconciled. At
 suspense account is replaced with the account of the counterpart item or, in the case of
 :ref:`manual matching <accounting/reconciliation/set-account>`, the selected account.
 
+.. seealso::
+   - :ref:`Duplicate transactions <accounting/bank-synchronization/duplicate-transactions>`
+   - :ref:`Missing transactions <accounting/bank-synchronization/missing-transactions>`
+
 .. _accounting/reconciliation/action-buttons:
 
-Possible action buttons
-~~~~~~~~~~~~~~~~~~~~~~~
+Possible actions
+~~~~~~~~~~~~~~~~
 
-Up to two suggested action buttons are available as primary buttons, but all available action
-buttons are displayed when the transaction is expanded. The following action buttons are available
-depending on the details of the transaction:
+Depending on the transaction, up to two suggested actions are available as buttons while other
+actions can be accessed by clicking the :icon:`oi-ellipsis-v` :guilabel:`(ellipsis)` button:
 
 - :guilabel:`Set Partner`: Open a search view to add a partner to the transaction.
 - :guilabel:`Set Account`: Open a search view to manually select an account to write off the full
@@ -90,14 +93,6 @@ depending on the details of the transaction:
   is displayed. Click the reconciliation model's action button to generate the counterpart items
   defined on the reconciliation model.
 
-.. note::
-   To remove the partner from a transaction, click the :icon:`fa-times` :guilabel:`(close)` icon
-   next to the partner's name.
-
-Click the :icon:`fa-chevron-down` :guilabel:`(chevron down)` button next to the possible action
-buttons of an expanded line to display any of the above action buttons that are hidden due to space
-limitations, as well as the following:
-
 - :guilabel:`Upload bills`: Upload one or more bills to be :doc:`digitized
   <../vendor_bills/invoice_digitization>`. After digitization, the bills are available for matching
   via the :guilabel:`Reconcile` action button.
@@ -106,8 +101,10 @@ limitations, as well as the following:
 - :guilabel:`Delete Transaction`: Delete this transaction.
 
 .. note::
-   Uploading bills from the :guilabel:`Bank Matching` view does not automatically reconcile them
-   with the active transaction.
+   - To remove the partner from a transaction, click the :icon:`fa-times` :guilabel:`(close)` icon
+     next to the partner's name.
+   - Uploading bills from the :guilabel:`Bank Matching` view does not automatically reconcile them
+     with the active transaction.
 
 .. seealso::
    :doc:`../../../essentials/in_app_purchase`
@@ -129,9 +126,6 @@ sequential order to identify and apply a match:
 
 - Exact match
 - Discounted match: for payment terms with discounts for early payments
-- Tolerance match: within 3% to account for merchant fees, rounding differences, and user errors
-- Currency match: when the transaction is in a different currency than the invoice, bill, or
-  payment (with a 3% tolerance for exchange rate differences)
 - Amount in label: if the invoice :guilabel:`Amount` is found in the transaction's
   :guilabel:`Label`
 

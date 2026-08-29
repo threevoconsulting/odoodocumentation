@@ -21,7 +21,7 @@ The *one-step inventory flow* is the simplest option, with minimal handling step
 traceability. In this setup, products move directly from vendors to stock or from stock to
 customers, with Odoo only tracking when items enter or leave the warehouse. This makes it ideal for
 businesses with high-volume, low-risk products or fast-moving operations where additional validation
-steps aren’t necessary.
+steps are not necessary.
 
 - **Receiving**: Products go directly into stock.
 - **Shipping**: Products ship directly from stock.
@@ -63,10 +63,15 @@ enforcing stricter processes and improving oversight.
    While this setup enhances process control, separating picking and packing requires validation at
    each step. If the same person handles both, it may cause redundancy and slow operations.
 
-   Quality checks and packing do not require a three-step flow. Enable :doc:`quality control points
-   <../../quality/quality_management/quality_control_points>` separately or activate the
-   :ref:`Packages feature <inventory/warehouses_storage/enable-package>` in Odoo to incorporate
-   these processes without adding extra transfer steps.
+   Quality checks and packing **do not** require a three-step flow. To quality check outside of this
+   flow:
+
+   - Enable :doc:`quality control points <../../quality/quality_management/quality_control_points>`
+     separately
+   - Perform :ref:`manual quality checks <quality/quality_checks/manual>`
+
+   Activate the :ref:`Packages feature <inventory/warehouses_storage/enable-package>` to package
+   outside of the three-step flow.
 
 - **Receiving**: Products follow a structured process: *input area* → *quality control* → *stock*.
 - **Shipping**: Products are *picked*, *packed*, and then *shipped*, ensuring proper handling and
@@ -155,6 +160,5 @@ needs.
    daily_operations/delivery_three_steps
    daily_operations/putaway
    daily_operations/storage_category
-   daily_operations/stock_warehouses
    daily_operations/owned_stock
    daily_operations/dropshipping
